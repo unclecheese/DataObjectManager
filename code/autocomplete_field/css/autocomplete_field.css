@@ -1,0 +1,7 @@
+.autocomplete_input {height:16px;margin:0;}
+.autocomplete_holder {position:relative;}
+.autocomplete_results {background:#fff;display:none;position:absolute;top:24px;max-height:200px;overflow:auto;border:1px solid #ccc;width:250px;z-index:10;}
+.autocomplete_results h5 {font-size:12px;margin:0;padding:0;}
+.autocomplete_results ul {margin:0;padding:0;width:auto;float:none;}
+.autocomplete_results ul li {margin:0;padding:4px;list-style:none;display:block !important;float:none;width:auto;display:block;border-bottom:1px solid #dcdcdc;}
+.autocomplete_results ul li:hover {background:#efefef;}

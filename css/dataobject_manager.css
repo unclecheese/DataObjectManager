@@ -1,0 +1,203 @@
+.DataObjectManager {position:relative;}
+
+.dataobject-list {padding:0;overflow:visible;margin:0;}
+.dataobject-list ul {margin:0;}
+.dataobject-list li:hover {background:#feffe0;}
+.dataobject-list li.selected {background:#f0fdf4;}
+.dataobject-list li:hover div.actions.col a {visibility:visible;}
+.dataobject-list li:hover div.actions.col a:hover {background:none;}
+
+.list .dataobject-list li div.pad {font-size:12px;padding:0 3px;float:none;}
+.list .dataobject-list li div {float:left;}
+.list .dataobject-list div.actions.col {width:9%;float:right;text-align:right;border:0;position:relative;}
+.list .dataobject-list div.actions.col a {visibility:hidden;display:inline;margin:0 5px;}
+.list .dataobject-list div.actions.col input {border:0;padding:0;margin:0;background:none;}
+.list .dataobject-list li.head {font-weight:bold;font-size:12px;background:url(../images/heading_bg.gif) repeat-x top left;}
+.list .dataobject-list li.head .col .pad {border-right:1px solid #aaa;}
+.list .dataobject-list li.head .col.last .pad {border:0;}
+.list .dataobject-list li.head a {display:block;width:100%;text-decoration:none;color:#333;font-size:12px;margin:0;padding:0;width:100%;}
+.list .dataobject-list li.head div.pad {padding:0 3px;}
+.list .dataobject-list li.head a:hover {background:none;}
+.list .dataobject-list li {width:98.9%;overflow:hidden;border-bottom:1px solid #e4e4e4;padding:4px 5px;text-align:left;font-size:12px;}
+.list .dataobject-list li .fields-wrap {width:90%;float:left;}
+.list .dataobject-list li .fields-wrap .col li {width:auto;border:0;padding:0;}
+.ui-sortable li {cursor:move;}
+
+.grid .dataobject-list {padding:10px 0;}
+.grid .dataobject-list li {text-align:center;width:20%;float:left;height:100px;background:none;border:0;padding:6px 0;position:relative;list-style:none;}
+.grid .dataobject-list li span.handle {position:absolute;top:3px;left:3px;}
+.grid .dataobject-list li a:hover {background:none;}
+.grid .dataobject-list li div {float:none;font-size:11px;}
+.grid .dataobject-list li .file-label {margin-top:4px;padding:3px 2px;border:1px solid #aaa;;border-width:1px 0;background:#eee;}
+.grid .dataobject-list li .file-label a {text-decoration:none;color:333;}
+.grid .dataobject-list li.add-row {float:none;clear:both;}
+.grid .dataobject-list .delete a img {display:inline;}
+.grid .dataobject-list .delete a {visibility:hidden;text-align:right}
+.grid .dataobject-list li:hover {background:#feffe0;}
+.grid .dataobject-list li:hover .delete a {display:inline;visibility:visible;}
+.grid .dataobject-list li div.pad {padding:8px 10px;}
+#tooltip {max-width:300px;position: absolute;z-index: 3000;border: 1px solid #111;background-color: #eee;padding: 5px;opacity: 0.85;}
+
+
+#Form_ImportForm ul li {list-style:none;border-bottom:1px solid #aaa;;height:40px;padding:4px 0;}
+#Form_ImportForm ul li:hover {background:#eee;}
+#Form_ImportForm ul li.current {background:#ddd;}
+#Form_ImportForm ul li.disabled img {opacity:0.5;}
+#Form_ImportForm ul li.disabled .import-title {color:#999;}
+#Form_ImportForm ul li.disabled:hover {background:none;}
+#Form_ImportForm .select {margin:10px 0;}
+#Form_ImportForm span {font-weight:bold;}
+.import-checkbox {vertical-align:50%;}
+.import-title {vertical-align:80%;margin-left:10px;}
+
+
+.dataobjectmanager-actions {width:55%;float:left;height:35px;}
+.dataobjectmanager-actions.filter {padding-top:2em;height:auto;}
+.dataobjectmanager-actions a {background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;display: block;float: left;height: 24px;margin-right: 6px;padding-right: 13px;text-decoration: none;color: #333;font-size:13px;font-weight:bold;cursor:pointer;}
+.dataobjectmanager-actions a span {background: transparent url('../images/bg_button_span.gif') no-repeat;display: block;line-height: 22px;padding: 2px 0 5px 10px;font-size:12px;height:17px;} 
+.dataobjectmanager-actions a:active {background: transparent url('../images/bg_button_a.gif') no-repeat scroll right -24px;;display: block;float: left;height: 24px;margin-right: 6px;padding-right: 13px;text-decoration: none;color: #333;font-size:13px;font-weight:bold;}
+.dataobjectmanager-actions a:active span {background: transparent url('../images/bg_button_span.gif') no-repeat left -24px;display: block;line-height: 22px;padding: 2px 0 5px 10px;font-size:12px;height:17px;} 
+.AssetAdmin .dataobjectmanager-actions {margin-top:20px;height:25px;}
+.dataobjectmanager-actions a img {vertical-align:-3px;margin-right:3px;}
+.dataobjectmanager-search {width:160px;position:absolute;right:6px;top:7px;}
+.dataobjectmanager-search .sbox_l  {background: white url('../images/srch_l.gif') no-repeat top left;float: left;width: 19px; height: 19px;}
+.dataobjectmanager-search .sbox_r  {background: white url('../images/srch_r.gif') no-repeat top left;float: left;width: 19px; height: 19px;}
+.dataobjectmanager-search .sbox input {background: white url('../images/srch_bg.gif') repeat-x top left;float: left;border: 0;height: 13px; width: 112px;padding: 3px;font: 11px/13px arial;color: #666;}
+.dataobjectmanager-search #srch_clear {background: white url('../images/srch_r_f2.gif') no-repeat top left;}
+
+
+.dataobjectmanager-filter {position:relative;width:30%;float:right;text-align:right;}
+.dataobjectmanager-filter select {width:100%;max-width:250px;}
+.dataobjectmanager-filter label {font-weight:bold;}
+.dataobjectmanager-filter div.middleColumn {background:none !important;}
+.DataObjectManager .Pagination {font-weight:normal;color:#333;text-indent:0;background:none;;width:210px;text-align:center;position:absolute;left:50%;top:8px;margin-left:-100px;}
+.DataObjectManager .Pagination .Count {padding-bottom:0px;vertical-align:30%;}
+
+.view-controls {width:200px;position:absolute;top:8px;left:8px;}
+.view-controls .viewbutton {margin-right:5px;height:19px;padding-right:6px;text-decoration:none;color:#333;display:block;float:left;width:16px;}
+.view-controls .viewbutton span {text-align:center;padding-left:4px;vertical-align:10px;display:block;height:19px;}
+.view-controls .viewbutton span img {display:inline;margin:2px 0 0 0;}
+.view-controls .viewbutton.current {background:url(../images/viewbutton_right.gif) no-repeat top right;}
+.view-controls .viewbutton.current span {background:url(../images/viewbutton_left.gif) no-repeat top left;}
+.view-controls .viewbutton:hover {background:none;}
+.view-controls .viewbutton.current:hover {background:url(../images/viewbutton_right.gif) no-repeat top right;}
+
+.top-controls {position:relative;clear:none;height:34px;}
+.top-controls .rounded_table_top_right {height:34px;background:url(../images/rounded_top_right.gif) no-repeat top right;padding-right:6px;}
+.top-controls .rounded_table_top_left {height:34px;background:url(../images/rounded_top_left.gif) no-repeat top left;}
+.bottom-controls {position:relative;clear:both;height:34px;}
+.bottom-controls .rounded_table_bottom_right {height:34px;background:url(../images/rounded_bottom_right.gif) no-repeat top right;padding-right:6px;}
+.bottom-controls .rounded_table_bottom_left {height:34px;background:url(../images/rounded_bottom_left.gif) no-repeat top left;}
+
+.sort-control {width:16em;float:left;padding:8px 0 0 5px;}
+.sort-control label {font-size:10px !important;margin-left:3px;}
+
+.only-related-control {width:16em;float:left;padding:8px 0 0 5px;}
+.only-related-control label {font-size:10px !important;margin-left:3px;}
+
+
+.per-page-control {position:absolute;right:10px;top:5px;}
+.ajax-loader {width:16px;height:16px;background:url(../images/ajax-loader.gif);display:none;position:absolute;left:50%;margin-left:-8px;top:15px;}
+
+/* Image DOM */
+.ImageDataObjectManager .grid .dataobject-list li {text-align:left;width:100px;float:left;height:100px;border:2px solid #aaa;margin:5px 5px 0 0;background:#eee;padding:.5%;}
+.ImageDataObjectManager .grid .dataobject-list li .pad {padding:0;}
+.ImageDataObjectManager .grid .dataobject-list li:hover .delete  {background:#fff;width:16px;height:16px;position:absolute;bottom:0;right:0;padding:4px 0 0 4px;}
+.DataObjectManager-popup .preview-image {text-align:center;position:relative;}
+
+.size-control.ui-slider {background:#ccc;height:3px;border:1px solid #aaa;}
+.ImageDataObjectManager .size-control .ui-slider-handle {background:url(../images/slider1.gif) no-repeat center;height:18px;top:-9px;width:16px;border:0;}
+#size-control-wrap {padding:0 20px;}
+#size-control-wrap {width:150px;position:absolute; left:10px;top:15px;}
+#size-control-wrap img {position:absolute;top:-6px;}
+#size-control-wrap img.out {left:0;}
+#size-control-wrap img.in {right:0;}
+
+
+/* preload column widths */
+.list.column1 .dataobject-list li .fields-wrap .col {width:100%;}
+.list.column2 .dataobject-list li .fields-wrap .col {width:49.9%;}
+.list.column3 .dataobject-list li .fields-wrap .col {width:33%;}
+.list.column4 .dataobject-list li .fields-wrap .col {width:24.9%;}
+.list.column5 .dataobject-list li .fields-wrap .col {width:19.9%;}
+.list.column6 .dataobject-list li .fields-wrap .col {width:16.5%;}
+.list.column7 .dataobject-list li .fields-wrap .col {width:14%;}
+.list.column8 .dataobject-list li .fields-wrap .col {width:12%;}
+.list.column9 .dataobject-list li .fields-wrap .col {width:11%;}
+.list.column10 .dataobject-list li .fields-wrap .col {width:9.9%;}
+
+
+
+/* popup */
+.DataObjectManager-popup {background:#f7f7f7;}
+.DataObjectManager-popup form {margin:0;padding:0;}
+.DataObjectManager-popup fieldset {margin:0;padding:0;}
+.DataObjectManager-popup h2,
+.DataObjectManager-popup form h2 {margin:0;padding:0 5px;font-size:14px;background:#ccdef3;}
+.DataObjectManager-popup h3,
+.DataObjectManager-popup form h3 {border:1px solid #aaa;border-width:1px 0;padding:5px 4px;background:#eee;margin:14px 0;font-size:12px;font-style:italic;clear:both;}
+.DataObjectManager-popup .dataobjectmanager-actions h3 {border:0;background:transparent;}
+.DataObjectManager-popup h3 span {margin-left:10px;vertical-align:10px;;font-size:12px;}
+.DataObjectManager-popup ul#file_list li div.queue-file-name {width:100%;float:none;padding-left:5px;}
+.DataObjectManager-popup ul#file_list li div.progressWrapper {width: 357px;display:block;float:none;padding:0 4px;border-width:0 1px 0 0;}
+.DataObjectManager-popup ul#file_list li {margin:0;padding:0;}
+.DataObjectManager-popup ul#file_list {margin:10px 0;padding:0;}
+.DataObjectManager-popup #import-holder ul {padding:0;height:180px;overflow:auto;}
+.DataObjectManager-popup ul#file_list li a:hover {background:none;}
+.DataObjectManager-popup div.fileiframe.field {width:433px;}
+.DataObjectManager-popup .queue-remove-btn a {font-size:10px;text-decoration:none;}
+.DataObjectManager-popup .queue-file-name {font-size:11px;}
+.DataObjectManager-popup .current-image {text-align:center;padding-top:5px;}
+.DataObjectManager-popup small a {display:none;}
+.DataObjectManager-popup .ajax-loader {width:32px;height:32px;background:url(../images/ajax-loader-lg.gif) no-repeat;position:absolute; top:50%;left:50%;margin:-16px 0 0 -16px;display:none;}
+.DataObjectManager-popup .rotate-controls a:hover {background:none;}
+.DataObjectManager-popup #preview-image {position:relative;}
+.DataObjectManager-popup #preview-image .ajax-loader {height:auto;width:100%;position:static;margin:0;text-align:center;background:none;}
+.DataObjectManager-popup #preview-image .ajax-loader img {vertical-align:-5px;}
+.DataObjectManager-popup .Actions {padding:0px 5px 5px 5px;width:49%;float:left;margin-top:5px;}
+.DataObjectManager-popup .Actions input {background:#3b5998;border:0;font-size:12px;color:#fff;padding:5px 10px;border:1px solid;border-color: #d9dfda #0e1f5b #0e1f5b #d9dfda; }
+.DataObjectManager-popup .Actions input.disabled,
+.DataObjectManager-popup .Actions input.disabled:hover {background:#ddd;color:#999;padding:5px 10px;border:1px solid;border-color: 666; }
+
+.DataObjectManager-popup .Actions input:hover {background:#4c69a6;}
+.DataObjectManager-popup .message {border: 1px solid;margin: 10px 0px;padding:15px 10px 15px 50px;background-repeat: no-repeat;background-position: 10px center;}
+.DataObjectManager-popup .message.good {color: #4F8A10;background-color: #DFF2BF;background-image:url('../images/success.png');}
+.DataObjectManager-popup input#action_saveUploadForm {display:none;}
+
+
+.DataObjectManager-popup form .field div.middleColumn {width:95%;}
+.DataObjectManager-popup #field-holder {position:relative;overflow:auto;padding-bottom:32px;}
+.DataObjectManager-popup #fade {height:32px;background: url('../images/fade.png') repeat-x;position:fixed;left:0;z-index:100;}
+
+.DataObjectManager-popup #pagination {border:0;width:110px;float:right;padding:2px;overflow:hidden; margin:10px 0 0 0;clear:none;}
+.DataObjectManager-popup #pagination a {border:solid 0px #DEDEDE;font-size:11px;color:#888888;display:block;float:left;font-weight:bold;margin-right:2px;padding:3px 4px;text-decoration:none;}
+.DataObjectManager-popup #pagination a:hover{background:#ccc;color:#fff;}
+.DataObjectManager-popup #pagination .next {float:right;}
+
+/** Nested DOM **/
+
+.DataObjectManager-popup.nestedController .Actions input {cursor:pointer;background:transparent;color:#4F8A10;border:0;text-transform:lowercase;margin:0;padding:0;}
+.DataObjectManager-popup.nestedController .Actions #nested-close {text-decoration:none;color:#ce2027;text-transform:lowercase;font-size:12px;}
+.DataObjectManager-popup.nestedController .message {border:0;margin: 10px 0px;padding:0;}
+.DataObjectManager-popup.nestedController .message.good {color: #4F8A10;background:transparent;}
+a.nested-close {display:block;text-indent:-9999em;width:30px;height:30px;background: url('../images/closebox.png') no-repeat top left;position:absolute;top:-15px;right:-15px;}
+.iframe_wrap {width:450px;margin:0 auto;border:5px solid #ccc;background:#fff;position:relative;}
+.iframe_wrap.loading {height:60px;background:url(../images/ajax-loader-lg.gif) no-repeat center;}
+.DataObjectManager-popup div.dataobject-list ul {margin-left:0;padding-left:0;}
+.isNested .sort-control label {left:20px;top:4px;}
+/* accommodate input field for relation dataobjectmangaer */
+.RelationDataObjectManager .list .dataobject-list li .fields-wrap {width:85%;}
+.RelationDataObjectManager .list .dataobject-list div.actions.col {width:14%;}
+.RelationDataObjectManager .list .dataobject-list div.actions.col {text-align:left;text-indent:}
+.RelationDataObjectManager .list .dataobject-list li.head div.actions.col a {visibility:visible;font-weight:normal;font-size:10px;color:#0074c6;display:block;}
+.RelationDataObjectManager .grid .dataobject-list div.actions.col {float:none;width:100%;text-align:right;}
+.RelationDataObjectManager .grid .dataobject-list div.actions.col a {text-decoration:none;}
+
+/* Target IE7 only */
+html>body .DataObjectManager {*width:96%;}
+/* end */
+
+
+.delete_dialog {background:#fff;border:3px solid #ccc;position:absolute; width:150px;text-align:center;right:5px;top:50%;height:26px;z-index:10000;color:#666;font-weight:bold;line-height:24px;margin-top:-17px;-moz-border-radius: 5px;-webkit-border-radius:5px;background:#fff;display:none;}
+.list .dataobject-list div.actions.col .delete_dialog a {visibility:visible;}
+.delete_dialog img {height:10px;vertical-align:middle;}

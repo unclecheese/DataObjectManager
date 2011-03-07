@@ -1,0 +1,12 @@
+.ImageDataObjectManager .grid .dataobject-list li {text-align:left;width:100px;float:left;height:100px;border:2px solid #aaa;margin:5px 5px 0 0;background:#eee;padding:.5%;}
+.ImageDataObjectManager .grid .dataobject-list li .pad {padding:0;}
+.ImageDataObjectManager .grid .dataobject-list li:hover .delete  {background:#fff;width:16px;height:16px;position:absolute;bottom:0;right:0;padding:4px 0 0 4px;}
+.DataObjectManager-popup .preview-image {text-align:center;position:relative;}
+
+.size-control.ui-slider {background:#ccc;height:3px;border:1px solid #aaa;}
+.size-control .ui-slider-handle {background:url(../images/slider1.gif) no-repeat center;height:18px;top:-9px;width:16px;border:0;}
+#size-control-wrap {padding:0 20px;}
+#size-control-wrap {width:150px;position:absolute; left:10px;top:15px;}
+#size-control-wrap img {position:absolute;top:-6px;}
+#size-control-wrap img.out {left:0;}
+#size-control-wrap img.in {right:0;}

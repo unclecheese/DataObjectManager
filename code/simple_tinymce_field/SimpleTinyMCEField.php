@@ -183,7 +183,7 @@ class SimpleTinyMCEField extends TextareaField
   private function buildJS()
   {
     $js = sprintf("
-      $(function() {
+		;(function($) {
 				$('#%s').tinymce({
   				  plugins : '%s',
   				  theme : '%s',
@@ -198,7 +198,7 @@ class SimpleTinyMCEField extends TextareaField
   			   content_css : '%s'
   			   %s
 		    });
-		  });",
+		})(jQuery);",
 		  $this->Id(),
 		  $this->getPlugins(),
 		  $this->getTheme(),

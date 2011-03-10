@@ -60,7 +60,7 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 			$sourceField = 'Child';
 		$parentID = $this->controller->ID;
 		
-		$this->sourceJoin .= " LEFT JOIN `$manyManyTable` ON (`$source`.`ID` = `{$sourceField}ID` AND `$manyManyTable`.`{$this->manyManyParentClass}ID` = '$parentID')";
+		$this->sourceJoin .= " LEFT JOIN \"$manyManyTable\" ON (\"$source\".\"ID\" = \"{$sourceField}ID\" AND \"$manyManyTable\".\"{$this->manyManyParentClass}ID\" = '$parentID')";
 		
 		$this->joinField = 'Checked';
 		if(isset($_REQUEST['ctf'][$this->Name()]['only_related']))
@@ -80,35 +80,35 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 	}
 	
 
-	protected function loadSort()
-	{
+	protected function loadSort() {
 
 		if($this->ShowAll()) 
 			$this->setPageSize(999);
 
+		$original_sort = $this->sourceSort;
 	    if(SortableDataObject::is_sortable_many_many($this->sourceClass(), $this->manyManyParentClass)) {
 	      list($parentClass, $componentClass, $parentField, $componentField, $table) = singleton($this->controllerClass())->many_many($this->Name());
 	      $sort_column = "MMSort";
 	      if(!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == $sort_column) {
 	        $this->sort = $sort_column;
-	        $this->sourceSort = "$sort_column " . SortableDataObject::$sort_dir;
-			$this->sourceSort .= ",Checked DESC";
+	        $this->sourceSort = "\"$sort_column\" " . SortableDataObject::$sort_dir;
+			$this->sourceSort .= ", \"Checked\" DESC";
 	      }
 	    }
 		elseif($this->Sortable() && (!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == "SortOrder")) {
 			$this->sort = "SortOrder";
-			$this->sourceSort = "SortOrder " . SortableDataObject::$sort_dir;
-			$this->sourceSort .= ", Checked DESC";
+			$this->sourceSort = "\"SortOrder\" " . SortableDataObject::$sort_dir;
+			$this->sourceSort .= ", \"Checked\" DESC";
 		}
 		
 		elseif(isset($_REQUEST['ctf'][$this->Name()]['sort']) && !empty($_REQUEST['ctf'][$this->Name()]['sort'])) {
-			$this->sourceSort = $_REQUEST['ctf'][$this->Name()]['sort'] . " " . $this->sort_dir;
+			$this->sourceSort = "\"".$_REQUEST['ctf'][$this->Name()]['sort'] . "\" " . $this->sort_dir;
 		}
 		else {
 			$this->sourceSort = singleton($this->sourceClass())->stat('default_sort');
 		}
 
-		
+		if ($original_sort && $original_sort != $this->sourceSort) $this->sourceSort .= ', '.$original_sort;
 	}
 	
 	
@@ -143,9 +143,9 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 	function getQuery($limitClause = null) {
 		if($this->customQuery) {
 			$query = $this->customQuery;
-			$query->select[] = "{$this->sourceClass}.ID AS ID";
-			$query->select[] = "{$this->sourceClass}.ClassName AS ClassName";
-			$query->select[] = "{$this->sourceClass}.ClassName AS RecordClassName";
+			$query->select[] = "\"{$this->sourceClass}\".\"ID\" AS \"ID\"";
+			$query->select[] = "\"{$this->sourceClass}\".\"ClassName\" AS \"ClassName\"";
+			$query->select[] = "\"{$this->sourceClass}\".\"ClassName\" AS \"RecordClassName\"";
 		}
 		else {
 			$query = singleton($this->sourceClass)->extendedSQL($this->sourceFilter, $this->sourceSort, $limitClause, $this->sourceJoin);
@@ -154,18 +154,27 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 
 			$SNG = singleton($this->sourceClass);
 			foreach($this->FieldList() as $k => $title) {
-				if(! $SNG->hasField($k) && ! $SNG->hasMethod('get' . $k))
+				if(! $SNG->hasField($k) && ! $SNG->hasMethod('get' . $k)) {
+					// everything we add to select must be added to groupby too...
 					$query->select[] = $k;
+					$query->groupby[] = $k;
+				}
 			}
 			$parent = $this->controllerClass();
 			$mm = $this->manyManyTable;
-			$if_clause = "IF(`$mm`.`{$this->manyManyParentClass}ID` IS NULL, '0', '1')";
-			$query->select[] = "$if_clause AS Checked";
-		    if(SortableDataObject::is_sortable_many_many($this->sourceClass(), $this->manyManyParentClass))
-				$query->select[] = "IFNULL(`$mm`.SortOrder,9999999) AS MMSort";
+			$when_clause = "CASE WHEN \"$mm\".\"{$this->manyManyParentClass}ID\" IS NULL THEN '0' ELSE '1' END";
+			$query->select[] = "$when_clause AS \"Checked\"";
+			// everything we add to select must be added to groupby too...
+			$query->groupby[] = $when_clause;
+			
+		    if (SortableDataObject::is_sortable_many_many($this->sourceClass(), $this->manyManyParentClass)) {
+				$query->select[] = "COALESCE(\"$mm\".\"SortOrder\",9999999) AS \"MMSort\"";
+				// everything we add to select must be added to groupby too...
+				$query->groupby[] = "COALESCE(\"$mm\".\"SortOrder\",9999999)";
+			}
 			
 			if($this->OnlyRelated())
-			 $query->where[] = $if_clause;
+				$query->where[] = "(\"$mm\".\"{$this->manyManyParentClass}ID\" IS NOT NULL)";
 		}
 		return clone $query;
 	}

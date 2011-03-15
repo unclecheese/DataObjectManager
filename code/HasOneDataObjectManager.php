@@ -37,7 +37,7 @@ class HasOneDataObjectManager extends HasManyDataObjectManager
 	}
 	
 	function isChildSet($childID) {
-		return DataObject::get($this->controllerClass(), '`' . $this->joinField . "` = '$childID'");
+		return DataObject::get($this->controllerClass(), '"' . $this->joinField . "\" = '$childID'");
 	}
 	
 	function ExtraData() {

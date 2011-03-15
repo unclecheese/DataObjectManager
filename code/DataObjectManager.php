@@ -201,10 +201,10 @@ class DataObjectManager extends ComplexTableField
 		
 		if($this->Sortable() && (!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == "SortOrder")) {
 			$this->sort = "SortOrder";
-			$this->sourceSort = "SortOrder ASC";
+			$this->sourceSort = "\"SortOrder\" ASC";
 		}
 		elseif(isset($_REQUEST['ctf'][$this->Name()]['sort']) && !empty($_REQUEST['ctf'][$this->Name()]['sort'])) {
-			$this->sourceSort = $_REQUEST['ctf'][$this->Name()]['sort'] . " " . $this->sort_dir;
+			$this->sourceSort = "\"" . $_REQUEST['ctf'][$this->Name()]['sort'] . "\" " . $this->sort_dir;
 		}
 		elseif($sort = singleton($this->sourceClass())->stat('default_sort')) {
 			$this->sourceSort = $sort;
@@ -752,7 +752,7 @@ class DataObjectManager_Controller extends Controller
 	            if(!isset($relationName)) return false;
 	            list($parentClass, $componentClass, $parentField, $componentField, $table) = singleton($ownerClass)->many_many($relationName);            
 	            foreach($map as $sort => $id)
-	              DB::query("UPDATE `$table` SET SortOrder = $sort WHERE {$className}ID = $id AND {$ownerClass}ID = $controllerID");
+	              DB::query("UPDATE \"$table\" SET \"SortOrder\" = $sort WHERE \"{$className}ID\" = $id AND \"{$ownerClass}ID\" = $controllerID");
 	          }
 	          else {
 	            foreach($map as $sort => $id) {

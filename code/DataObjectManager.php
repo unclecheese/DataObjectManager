@@ -231,7 +231,7 @@ class DataObjectManager extends ComplexTableField
 	        $SNG = singleton($this->sourceClass); 			
 			foreach(parent::Headings() as $field) {
 				if($SNG->hasDatabaseField($field->Name))	
-					$search[] = "UPPER($field->Name) LIKE '%".strtoupper($this->search)."%'";
+					$search[] = "UPPER($field->Name) LIKE '%".Convert::raw2sql(strtoupper($this->search))."%'";
 			}
 			$search_string = "(".implode(" OR ", $search).")";
 		}

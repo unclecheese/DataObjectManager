@@ -24,7 +24,7 @@ class AssetManager extends FileDataObjectManager
     $fields->push(new SimpleTreeDropdownField('ParentID','Folder',"Folder"));
     $fields->push(new HiddenField('ID','',$controller->ID));
     
-    parent::__construct($controller, $name, $sourceClass, null, $headings, $fields, "Classname != 'Folder'");
+    parent::__construct($controller, $name, $sourceClass, null, $headings, $fields, "\"ClassName\" != 'Folder'");
   }
   
 	function FieldHolder()

@@ -99,13 +99,13 @@ class SortableDataObject extends DataObjectDecorator
           if($sort_field) break;
           foreach($join_tables as $join_table) {
             if(stristr($from,$join_table)) {
-              $sort_field = "`$join_table`.SortOrder";
+              $sort_field = "\"$join_table\".\"SortOrder\"";
               break;
             }
           }
        }
 	   }
-	   if(!$sort_field) $sort_field = "SortOrder";
+	   if(!$sort_field) $sort_field = "\"SortOrder\"";
 	   
 	   if(!$query->orderby || ($query->orderby == $this->owner->stat('default_sort')))
 	     $query->orderby = "$sort_field " . self::$sort_dir;

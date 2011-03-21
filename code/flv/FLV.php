@@ -189,7 +189,7 @@ class FLV extends File
 	
 	public function getThumbnail()
 	{
-	 if($img = DataObject::get_one("Image","Title = 'flv_thumb_{$this->ID}'"))
+	 if($img = DataObject::get_one("Image","\"Title\" = 'flv_thumb_{$this->ID}'"))
 	   return Director::fileExists($img->Filename) ? $img : false;
 	 return false;
 	}
@@ -209,7 +209,7 @@ class FLV extends File
 	private function createThumbnail()
 	{
       $img_title = "flv_thumb_".$this->ID;
-      if($existing = DataObject::get("Image","Title = '$img_title'")) {
+      if($existing = DataObject::get("Image","\"Title\" = '$img_title'")) {
         foreach($existing as $file) $file->delete();
       }
 			$folder = Folder::findOrMake(self::$thumbnail_folder);

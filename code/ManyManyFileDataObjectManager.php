@@ -56,7 +56,7 @@ class ManyManyFileDataObjectManager extends HasManyFileDataObjectManager
 			$sourceField = 'Child';
 		$parentID = $this->controller->ID;
 		
-		$this->sourceJoin .= " LEFT JOIN `$manyManyTable` ON (`$source`.`ID` = `{$sourceField}ID` AND `$manyManyTable`.`{$this->manyManyParentClass}ID` = '$parentID')";
+		$this->sourceJoin .= " LEFT JOIN \"$manyManyTable\" ON (\"$source\".\"ID\" = \"{$sourceField}ID\" AND \"$manyManyTable\".\"{$this->manyManyParentClass}ID\" = '$parentID')";
 		
 		$this->joinField = 'Checked';
 		if(isset($_REQUEST['ctf'][$this->Name()]['only_related']))
@@ -77,33 +77,31 @@ class ManyManyFileDataObjectManager extends HasManyFileDataObjectManager
 	}
 	
 		
-	protected function loadSort()
-	{
+	protected function loadSort() {
 
 		if($this->ShowAll()) 
 			$this->setPageSize(999);
 
-    if(SortableDataObject::is_sortable_many_many($this->sourceClass(), $this->manyManyParentClass)) {
-      list($parentClass, $componentClass, $parentField, $componentField, $table) = singleton($this->controllerClass())->many_many($this->Name());
-      $sort_column = "`$table`.SortOrder";
-      if(!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == $sort_column) {
-        $this->sort = $sort_column;
-        $this->sourceSort = "$sort_column " . SortableDataObject::$sort_dir;
-      }
-    }
-		
-		elseif($this->Sortable() && (!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == "SortOrder")) {
+		$original_sort = $this->sourceSort;
+    	if (SortableDataObject::is_sortable_many_many($this->sourceClass(), $this->manyManyParentClass)) {
+			list($parentClass, $componentClass, $parentField, $componentField, $table) = singleton($this->controllerClass())->many_many($this->Name());
+			$sort_column = "$table.SortOrder";
+			if (!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == $sort_column) {
+				$this->sort = $sort_column;
+				$this->sourceSort = "\"$table\".\"SortOrder\" " . SortableDataObject::$sort_dir;
+			}
+		} elseif ($this->Sortable() && (!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == "SortOrder")) {
 			$this->sort = "SortOrder";
-			$this->sourceSort = "SortOrder " . SortableDataObject::$sort_dir;
-		}
-		
-		elseif(isset($_REQUEST['ctf'][$this->Name()]['sort']) && !empty($_REQUEST['ctf'][$this->Name()]['sort'])) {
+			$this->sourceSort = "\"SortOrder\" " . SortableDataObject::$sort_dir;
+		} elseif (isset($_REQUEST['ctf'][$this->Name()]['sort'])) {
+			$this->sourceSort = "\"" . $_REQUEST['ctf'][$this->Name()]['sort'] . "\" " . $this->sort_dir;
+		} elseif(isset($_REQUEST['ctf'][$this->Name()]['sort']) && !empty($_REQUEST['ctf'][$this->Name()]['sort'])) {
 			$this->sourceSort = $_REQUEST['ctf'][$this->Name()]['sort'] . " " . $this->sort_dir;
-		}
-		else {
+		} else {
 			$this->sourceSort = singleton($this->sourceClass())->stat('default_sort');
 		}
-			
+
+		if ($original_sort && $original_sort != $this->sourceSort) $this->sourceSort .= ', '.$original_sort;
 	}
 	
 	
@@ -138,9 +136,9 @@ class ManyManyFileDataObjectManager extends HasManyFileDataObjectManager
 	function getQuery($limitClause = null) {
 		if($this->customQuery) {
 			$query = $this->customQuery;
-			$query->select[] = "{$this->sourceClass}.ID AS ID";
-			$query->select[] = "{$this->sourceClass}.ClassName AS ClassName";
-			$query->select[] = "{$this->sourceClass}.ClassName AS RecordClassName";
+			$query->select[] = "\"{$this->sourceClass}\".\"ID\" AS \"ID\"";
+			$query->select[] = "\"{$this->sourceClass}\".\"ClassName\" AS \"ClassName\"";
+			$query->select[] = "\"{$this->sourceClass}\".\"ClassName\" AS \"RecordClassName\"";
 		}
 		else {
 			$query = singleton($this->sourceClass)->extendedSQL($this->sourceFilter, $this->sourceSort, $limitClause, $this->sourceJoin);
@@ -149,16 +147,21 @@ class ManyManyFileDataObjectManager extends HasManyFileDataObjectManager
 
 			$SNG = singleton($this->sourceClass);
 			foreach($this->FieldList() as $k => $title) {
-				if(! $SNG->hasField($k) && ! $SNG->hasMethod('get' . $k))
+				if(! $SNG->hasField($k) && ! $SNG->hasMethod('get' . $k)) {
 					$query->select[] = $k;
+					// everything we add to select must be added to groupby too...
+					$query->groupby[] = $k;
+				}
 			}
 			$parent = $this->controllerClass();
 			$mm = $this->manyManyTable;
-			$if_clause = "IF(`$mm`.`{$this->manyManyParentClass}ID` IS NULL, '0', '1')";
-			$query->select[] = "$if_clause AS Checked";
+			$when_clause = "CASE WHEN \"$mm\".\"{$this->manyManyParentClass}ID\" IS NULL THEN '0' ELSE '1' END";
+			$query->select[] = "$when_clause AS \"Checked\"";
+			// everything we add to select must be added to groupby too...
+			$query->groupby[] = $when_clause;
 			
 			if($this->OnlyRelated())
-			 $query->where[] = $if_clause;
+				$query->where[] = "(\"$mm\".\"{$this->manyManyParentClass}ID\" IS NOT NULL)";
 		}
 		return clone $query;
 	}

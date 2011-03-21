@@ -57,7 +57,7 @@ class SimpleTreeDropdownField extends HTMLDropdownField
 	{
 		$options = array();
 		$class = ($this->sourceClass == "SiteTree" || is_subclass_of($this->sourceClass, "SiteTree")) ? "SiteTree" : $this->sourceClass;
-		$filter = ($this->filter) ? "ParentID = $parentID AND $this->filter" : "ParentID = $parentID";
+		$filter = ($this->filter) ? "\"ParentID\" = $parentID AND $this->filter" : "\"ParentID\" = $parentID";
 		if($children = DataObject::get($class, $filter)) {
 			foreach($children as $child) {
 				$indent="";

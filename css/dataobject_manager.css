@@ -63,7 +63,7 @@
 .dataobjectmanager-search .sbox_l  {background: white url('../images/srch_l.gif') no-repeat top left;float: left;width: 19px; height: 19px;}
 .dataobjectmanager-search .sbox_r  {background: white url('../images/srch_r.gif') no-repeat top left;float: left;width: 19px; height: 19px;}
 .dataobjectmanager-search .sbox input {background: white url('../images/srch_bg.gif') repeat-x top left;float: left;border: 0;height: 13px; width: 112px;padding: 3px;font: 11px/13px arial;color: #666;}
-.dataobjectmanager-search #srch_clear {background: white url('../images/srch_r_f2.gif') no-repeat top left;}
+.dataobjectmanager-search .srch_clear {background: white url('../images/srch_r_f2.gif') no-repeat top left;}
 
 
 .dataobjectmanager-filter {position:relative;width:30%;float:right;text-align:right;}

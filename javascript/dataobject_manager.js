@@ -197,7 +197,7 @@ $.fn.DataObjectManager.init = function(obj) {
 	
 		// Search
 		var request = false;
-		$container.find('#srch_fld').focus(function() {
+		$container.find('.srch_fld').focus(function() {
 			if($(this).attr('value') == "Search") $(this).attr('value','').css({'color' : '#333'});
 		}).unbind('blur').blur(function() {
 			if($(this).attr('value') == '') $(this).attr('value','Search').css({'color' : '#666'});
@@ -219,14 +219,14 @@ $.fn.DataObjectManager.init = function(obj) {
 				$input = $(this);
 				request = window.setTimeout(function() {
 					url = $(container_id).attr('href').replace(/\[search\]=(.)*?&/, '[search]='+$input.attr('value')+'&');
-          refresh($container, url, '#srch_fld'); 
+          refresh($container, url, '.srch_fld'); 
 					
-				},500)
+				},1000)
 			e.stopPropagation();
 		});
 		
-		$container.find('#srch_clear').unbind('click').click(function() {
-			$container.find('#srch_fld').attr('value','').keyup();
+		$container.find('.srch_clear').unbind('click').click(function() {
+			$container.find('.srch_fld').attr('value','').keyup();
 		});
 		
 
@@ -399,7 +399,8 @@ function refresh($div, link, focus)
      var $container = jQuery('#'+$div.attr('id')); 
      $container.DataObjectManager(); 
      if (typeof focus == 'string') { 
-       $container.find(focus).focus(); 
+        $target = $container.find(focus);
+        $target.focus().val($target.val());
      } 			
 			//jQuery('#'+$div.attr('id')).DataObjectManager();
 		}

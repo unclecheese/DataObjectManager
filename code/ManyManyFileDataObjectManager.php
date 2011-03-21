@@ -97,7 +97,7 @@ class ManyManyFileDataObjectManager extends HasManyFileDataObjectManager
 			$this->sourceSort = "\"" . $_REQUEST['ctf'][$this->Name()]['sort'] . "\" " . $this->sort_dir;
 		} elseif(isset($_REQUEST['ctf'][$this->Name()]['sort']) && !empty($_REQUEST['ctf'][$this->Name()]['sort'])) {
 			$this->sourceSort = $_REQUEST['ctf'][$this->Name()]['sort'] . " " . $this->sort_dir;
-		} else {
+		} elseif (empty($original_sort)) {
 			$this->sourceSort = singleton($this->sourceClass())->stat('default_sort');
 		}
 

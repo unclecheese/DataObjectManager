@@ -14,7 +14,7 @@
 			$FilterDropdown
 		</div>
 	<% end_if %>
-	<div style="clear:both;"><!-- --></div>
+	<div style="clear:both;"></div>
 	<div class="top-controls">
 		<div class="rounded_table_top_right">
 			<div class="rounded_table_top_left">

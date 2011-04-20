@@ -12,7 +12,7 @@
 	<div class="dataobjectmanager-filter">
 		<% if HasFilter %>$FilterDropdown<% end_if %>
 	</div>
-	<div style="clear:both;">&nbsp;</div>
+	<div style="clear:both;"></div>
 	<div class="top-controls">
 		<div class="rounded_table_top_right">
 			<div class="rounded_table_top_left">

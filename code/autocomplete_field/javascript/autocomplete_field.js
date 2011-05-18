@@ -46,7 +46,7 @@
 			.blur(function() {
 				$t = $(this);
 				setTimeout(function() {
-					$t.toggleClass('focus').val($element.initial_val).siblings('.autocomplete_results').hide();
+					$t.toggleClass('focus').siblings('.autocomplete_results').hide();
 				}, 500);
 			})			
 			
@@ -55,6 +55,11 @@
 $(function() {
 	$('input.autocomplete_input').livequery(function() {
 		$(this).autoComplete();
+	});
+	$('.livedropdown_results a').livequery("click", function() {
+		$(this).closest('.autocomplete_holder').find(':hidden').val(this.hash.replace('#',''));
+		$(this).closest('.autocomplete_holder').find('.autocomplete_input').val($(this).text());
+		return false;
 	});
 });
 })(jQuery);

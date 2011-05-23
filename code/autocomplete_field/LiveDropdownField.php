@@ -14,8 +14,8 @@ class LiveDropdownField extends HiddenField {
 	}
 
 	public function getresults(SS_HTTPRequest $r) {
-		if($search = $r->requestVar('q')) {
-			$q = Convert::raw2sql($search);
+
+			$q = Convert::raw2sql($r->requestVar('q'));
 			$results = DataObject::get($this->sourceClass,$this->labelField . " LIKE '%{$q}%'");
 			if($results) {
 				$set = new DataObjectSet();
@@ -31,7 +31,7 @@ class LiveDropdownField extends HiddenField {
 			}
 			
 			return $this->customise(array('Results' => $set))->renderWith('LiveDropdownField_results');			
-		}
+
 	}
 	
 	public function Field() {
@@ -47,7 +47,15 @@ class LiveDropdownField extends HiddenField {
 
 		Requirements::javascript('dataobject_manager/code/autocomplete_field/javascript/autocomplete_field.js');
 		Requirements::css('dataobject_manager/code/autocomplete_field/css/autocomplete_field.css');
-		return '<div class="autocomplete_holder"><input type="text" class="field text autocomplete_input {\'url\' : \''.$this->Link('getresults').'\'}" name="'.$this->Name().'_search" value="'.$text.'" />'.parent::Field().'<div class="autocomplete_results"></div></div>';
+		return '<div class="field text autocomplete_holder livedropdownfield">
+					<label for="'.$this->id().'">'.$this->Title().'</label>
+					<div class="middleColumn">
+						<input type="text" class="field text autocomplete_input {\'url\' : \''.$this->Link('getresults').'\'}" name="'.$this->Name().'_search" value="'.$text.'" />'.
+						parent::Field().
+						'<button class="livedropdown_browse">'._t('LiveDropdownField.BROWSE','Browse...').'</button>'.
+						'<div class="autocomplete_results"></div>
+					</div>
+				</div>';
 	}	
 	
 

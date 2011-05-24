@@ -26,6 +26,7 @@ class DataObjectManager extends ComplexTableField
 	protected $popupWidth;
 	protected $confirmDelete;
 	protected $hasCustomSourceID;
+	protected $clickToToggle = false;
 	public $itemClass = "DataObjectManager_Item";
 	public $addTitle;
 	public $singleTitle;
@@ -161,6 +162,10 @@ class DataObjectManager extends ComplexTableField
 		  }
 		}
 
+	}
+
+	public function setClickToToggle($bool) {
+		$this->clickToToggle = $bool;
 	}
 	
 	public function setSourceFilter($filter)
@@ -396,7 +401,11 @@ class DataObjectManager extends ComplexTableField
 		$form->Fields()->insertAfter(new LiteralField('close','</div>'),$o->Name());
 
 		return $form;
-	}	
+	}
+
+	public function ClickToToggle() {
+		return $this->clickToToggle;
+	}
 	
 	public function Link($action = null)
 	{

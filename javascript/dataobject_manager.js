@@ -165,7 +165,7 @@ $.fn.DataObjectManager.init = function(obj) {
 		// Click function for the LI
 		$container.find('ul:not(.ui-sortable) li.data').unbind('click').click(function(e) {
 			var $this = $(this);
-			if ($this.parent().hasClass('toggleSelect') {
+			if ($this.parent().hasClass('toggleSelect')) {
 				var $input = $this.find('input');
 				if ($input.length) {
 					$input.click();

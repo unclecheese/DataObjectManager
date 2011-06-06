@@ -93,26 +93,13 @@ class HasManyDataObjectManager extends DataObjectManager
 		$dataQuery = $this->getQuery($limitClause);
 		$records = $dataQuery->execute();
 		$items = new DataObjectSet();
+		$class = $this->sourceClass;
 		foreach($records as $record) {
-			if(! is_object($record))
-				$class = $this->sourceClass;
-				$record = new $class($record);
-			$items->push($record);
+			$items->push(new $class($record));
 		}
 		
-		$dataQuery = $this->getQuery();
-		$records = $dataQuery->execute();
-		$unpagedItems = new DataObjectSet();
-		foreach($records as $record) {
-			if(! is_object($record)) {
-				$class = $this->sourceClass;
-				$record = new $class($record);
-			}
-			$unpagedItems->push($record);
-		}
-		$this->unpagedSourceItems = $unpagedItems;
-		
-		$this->totalCount = ($this->unpagedSourceItems) ? $this->unpagedSourceItems->TotalItems() : null;
+		// changed to avoid using $this->unpagedSourceItems because it fails on large datasets 
+		$this->totalCount = $this->getQuery()->unlimitedRowCount();
 		
 		return $items;
 	}
@@ -145,10 +132,8 @@ class HasManyDataObjectManager extends DataObjectManager
 	
 	function ExtraData() {
 		$items = array();
-		foreach($this->unpagedSourceItems as $item) {
-			if($item->{$this->joinField} == $this->controller->ID)
-				$items[] = $item->ID;
-		}
+		// changed to avoid having to use $this->unpagedSourceItems because it fails on large datasets
+		$items = $this->getSelectedIDs();
 		$list = implode(',', $items);
 		$value = ",";
 		$value .= !empty($list) ? $list."," : "";
@@ -156,6 +141,24 @@ class HasManyDataObjectManager extends DataObjectManager
 		return <<<HTML
 		<input id="$inputId" name="{$this->name}[{$this->htmlListField}]" type="hidden" value="{$value}"/>
 HTML;
+	}
+
+	/**
+	 * Returns the list of IDs that should be checked in the list.
+	 * @see HasManyDataObjectManager::getSelectedIDs()
+	 * @return array
+	 */
+	function getSelectedIDs() {
+		$ids = array();
+		$dataQuery = $this->getQuery();
+		$dataQuery->having("{$this->joinField} = '{$this->controller->ID}'");
+		$records = $dataQuery->execute();
+		$class = $this->sourceClass;
+		foreach($records as $record) {
+			$item = new $class($record);
+			$ids[] = $item->ID;
+		}
+		return $ids;
 	}
 
 }

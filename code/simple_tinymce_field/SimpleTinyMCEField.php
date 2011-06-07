@@ -182,37 +182,37 @@ class SimpleTinyMCEField extends TextareaField
   
   private function buildJS()
   {
-    $js = sprintf("
-        (function($) {
-	$(function() {
+	$js = sprintf("
+		(function($) {
+			$(function() {
 				$('#%s').tinymce({
-  				  plugins : '%s',
-  				  theme : '%s',
-  			    %s,	  
-  			   theme_advanced_toolbar_location : '%s',
-      		 theme_advanced_toolbar_align : '%s',
-      		 theme_advanced_statusbar_location : '%s',
-      		 theme_advanced_resizing : %s,
-           paste_auto_cleanup_on_paste : true, 
-           paste_remove_spans: true, 
-           paste_remove_styles: true,      		 
-  			   content_css : '%s'
-  			   %s
-		    });
-		  });})(jQuery);",
-		  $this->Id(),
-		  $this->getPlugins(),
-		  $this->getTheme(),
-		  $this->getButtons(),
-		  $this->getToolbarLocation(),
-		  $this->getToolbarAlign(),
-		  $this->getStatusbarLocation(),
-		  $this->getAdvancedResizing(),
-		  $this->getContentCSS(),
-		  $this->getExtraOptions()
-		  
-		);
-    return $js;
+				  plugins : '%s',
+				  theme : '%s',
+				%s,	  
+				theme_advanced_toolbar_location : '%s',
+				theme_advanced_toolbar_align : '%s',
+				theme_advanced_statusbar_location : '%s',
+				theme_advanced_resizing : %s,
+				paste_auto_cleanup_on_paste : true, 
+				paste_remove_spans: true, 
+				paste_remove_styles: true,      		 
+				content_css : '%s'
+				%s
+			});
+			
+		});})(jQuery);",
+		$this->Id(),
+		$this->getPlugins(),
+		$this->getTheme(),
+		$this->getButtons(),
+		$this->getToolbarLocation(),
+		$this->getToolbarAlign(),
+		$this->getStatusbarLocation(),
+		$this->getAdvancedResizing(),
+		$this->getContentCSS(),
+		$this->getExtraOptions()		
+	);
+	return $js;
   }
 
   function Field()

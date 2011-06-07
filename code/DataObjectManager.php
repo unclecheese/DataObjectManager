@@ -517,9 +517,9 @@ class DataObjectManager extends ComplexTableField
 		  $map[$this->RelativeLink(array('per_page' => '9999'))] = _t('DataObjectManager.ALL','All');
 		$value = !empty($this->per_page) ? $this->RelativeLink(array('per_page' => $this->per_page)) : null;
 		return new FieldGroup(
-			new LabelField('show', _t('DataObjectManager.PERPAGESHOW','Show').' '),
+			new LabelField('show', _t('DataObjectManager.PERPAGESHOW','Show').' ',null,true),
 			new DropdownField('PerPage','',$map, $value),
-			new LabelField('results', ' '._t('DataObjectManager.PERPAGERESULTS','results per page'))
+			new LabelField('results', ' '._t('DataObjectManager.PERPAGERESULTS','results per page'),null,true)
 
 		);
 	}

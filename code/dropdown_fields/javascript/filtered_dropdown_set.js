@@ -12,7 +12,6 @@ $(function() {
 			dataType: 'json',
 			data: {q : $t.val()},
 			success: function(data) {
-				console.log(data);
 				var $target = $t.closest('.fieldgroupField').next('.fieldgroupField').find('select');
 				var currentValue = $target.val();
 				$target.html('');

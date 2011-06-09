@@ -92,7 +92,7 @@ class SortableDataObject extends DataObjectDecorator
 	
 	public function augmentSQL(SQLQuery &$query)
 	{
-	   if(empty($query->select) || $query->delete || in_array("COUNT(*)",$query->select)) return;	   
+	   if(empty($query->select) || $query->delete || in_array("COUNT(*)",$query->select) || in_array("count(*)",$query->select)) return;
 	   $sort_field = false;
 	   if($join_tables = self::get_join_tables($this->owner->class)) {
        foreach($query->from as $from) {
@@ -100,6 +100,9 @@ class SortableDataObject extends DataObjectDecorator
           foreach($join_tables as $join_table) {
             if(stristr($from,$join_table)) {
               $sort_field = "\"$join_table\".\"SortOrder\"";
+              if(isset($query->select['SortOrder'])) {
+              	$query->select['SortOrder'] = "\"{$this->owner->class}\".SortOrder AS LocalSort";
+              }
               break;
             }
           }

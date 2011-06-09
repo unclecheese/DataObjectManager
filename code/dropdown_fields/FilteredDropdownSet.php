@@ -25,6 +25,8 @@ class FilteredDropdownSet extends FieldGroup {
 		$this->name = $name;
 	}
 	
+	public function hasData() {return true;}
+
 	
 	public function FieldHolder() {
 		Requirements::javascript(THIRDPARTY_DIR.'/jquery/jquery.js');

@@ -40,7 +40,7 @@
 	</div>
 	<div class="list column{$Headings.Count}" class="list-holder" style="width:100%;">
 		<div class="dataobject-list">	
-			<ul class="<% if ShowAll %>sortable-{$sourceClass}<% end_if %><% if ClickToToggle %> toggleSelect<% end_if %>">
+			<ul class="<% if ShowAll %>sortable-{$SortableClass}<% end_if %><% if ClickToToggle %> toggleSelect<% end_if %>">
 				<li class="head">
 					<div class="fields-wrap">
 					<% control Headings %>

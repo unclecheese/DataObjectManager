@@ -675,8 +675,9 @@ class DataObjectManager_Item extends ComplexTableField_Item {
 
 	public function CustomActions()
 	{
-		if($this->item->hasMethod('customDOMActions'))
+		if($this->item->hasMethod('customDOMActions'))  {
 			return $this->item->customDOMActions();
+		}
 		return false;
 	}
 	
@@ -1089,7 +1090,8 @@ class DataObjectManagerAction extends ViewableData
 	static $behaviour_to_js = array (
 		'popup' => 'popup-button',
 		'delete' => 'delete-link',
-		'refresh' => 'refresh-button'
+		'refresh' => 'refresh-button',
+		'window' => 'window-link'
 	);
 	
 	public $Title;

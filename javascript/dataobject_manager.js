@@ -124,6 +124,11 @@ $.fn.DataObjectManager.init = function(obj) {
 			});
 			return false;
 		});
+		
+		$container.find('a.window-link').unbind('click').click(function(e) {
+			$(this).attr('target','_blank');
+			e.stopPropagation();
+		});
 				
 
 		// Pagination

@@ -356,7 +356,7 @@ class DataObjectManager extends ComplexTableField
 			$functioncall = $this->detailFormFields;
 			if(!$childData->hasMethod($functioncall)) $functioncall = "getCMSFields";
 			
-			$fields = $childData->$functioncall();
+			$fields = $childData->{$functioncall}($this);
 		}
     return $fields;  
   }

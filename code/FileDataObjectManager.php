@@ -14,6 +14,7 @@ class FileDataObjectManager extends DataObjectManager
 	public $view;
 	public $default_view = "grid";
 	protected $allowedFileTypes;
+	protected $uploadOnSubmit = false;
 	protected $limitFileTypes;
 	protected $uploadLimit;
 	protected $allowUploadFolderSelection = true;
@@ -222,6 +223,11 @@ class FileDataObjectManager extends DataObjectManager
 		$this->default_view = $type;
 	}
 	
+	public function uploadOnSubmit()
+	{
+		$this->uploadOnSubmit = true;
+	}
+	
 	public function upload()
 	{
 		if(!$this->can('add')) return;
@@ -301,7 +307,9 @@ class FileDataObjectManager extends DataObjectManager
 			$uploader->setFileTypes($this->getAllowedFileTypes(), $this->PluralTitle() . '(' . implode(',',$this->allowedFileTypes) . ')'); 
 		}  
 		$uploader->uploadFolder = $this->uploadFolder; 
-		$uploader->uploadOnSubmit();
+		if($this->uploadOnSubmit) {
+			$uploader->uploadOnSubmit();
+		}
 		return $fields;
 	}
 	

@@ -236,9 +236,11 @@ class DataObjectManager extends ComplexTableField
 	        $SNG = singleton($this->sourceClass); 			
 			foreach(parent::Headings() as $field) {
 				if($SNG->hasDatabaseField($field->Name))	
-					$search[] = "UPPER($field->Name) LIKE '%".Convert::raw2sql(strtoupper($this->search))."%'";
+					$search[] = "UPPER({$this->sourceClass}.$field->Name) LIKE '%".Convert::raw2sql(strtoupper($this->search))."%'";
 			}
-			$search_string = "(".implode(" OR ", $search).")";
+			if(!empty($search)) {
+				$search_string = "(".implode(" OR ", $search).")";
+			}
 		}
 		$and = (!empty($this->filter) && !empty($this->search)) ? " AND " : "";
 		$source_filter = $filter_string.$and.$search_string;
@@ -277,6 +279,16 @@ class DataObjectManager extends ComplexTableField
 		return parent::FieldHolder();
 	}
 
+	
+	public function HasSearch() {
+		$SNG = singleton($this->sourceClass);
+		foreach(parent::Headings() as $field) {
+			if($SNG->hasDatabaseField($field->Name)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public function Headings()
 	{

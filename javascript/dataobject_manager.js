@@ -216,8 +216,9 @@ $.fn.DataObjectManager.init = function(obj) {
 		}).unbind('blur').blur(function() {
 			if($(this).attr('value') == '') $(this).attr('value','Search').css({'color' : '#666'});
 		}).unbind('keyup').keyup(function(e) {
-        
-        if ((e.keyCode == 9) || (e.keyCode == 13) || // tab, enter 
+		if(e.keyCode == 13) {e.preventDefault();e.stopPropagation();return false;}
+		
+        if ((e.keyCode == 9) || // tab 
            (e.keyCode == 16) || (e.keyCode == 17) || // shift, ctl 
            (e.keyCode >= 18 && e.keyCode <= 20) || // alt, pause/break, caps lock
            (e.keyCode == 27) || // esc 

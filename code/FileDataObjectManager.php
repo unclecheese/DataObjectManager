@@ -43,6 +43,8 @@ class FileDataObjectManager extends DataObjectManager
 	
 	public $uploadifyField = "MultipleFileUploadField";
 	
+	public $copyOnImport = true;
+	
 	public function __construct($controller, $name = null, $sourceClass = null, $fileFieldName = null, $fieldList = null, $detailFormFields = null, $sourceFilter = "", $sourceSort = "", $sourceJoin = "") 
 	{
 		if(!class_exists("SWFUploadField") && !class_exists("UploadifyField"))
@@ -425,7 +427,7 @@ class FileDataObjectManager extends DataObjectManager
 				if($file = DataObject::get_by_id("File", (int) $id)) {
 					$upload_folder = $form->Fields()->fieldByName('UploadedFiles')->uploadFolder;
 					$folder_id = Folder::findOrMake($upload_folder)->ID;
-					if($file->ParentID != $folder_id) {
+					if($this->copyOnImport && ($file->ParentID != $folder_id)) {
 						$new_file_path = $this->uploadFolder.'/'.$file->Name;
 						copy($file->getFullPath(), BASE_PATH.'/'.ASSETS_DIR.'/'.$new_file_path);
 						$clone = new $file_class();
@@ -851,5 +853,3 @@ class FileDataObjectManager_Popup extends DataObjectManager_Popup
 	}
 	
 }
-
-?>

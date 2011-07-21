@@ -244,7 +244,7 @@ class FLV extends File
 	{
 		if($width === null) $width = self::$video_width;
 		if($height === null) $height = self::$video_height;
-		$image = ($thumb = $this->VideoThumbnail()) ? $thumb->CroppedImage($width,$height)->URL : "";
+		$image = ($thumb = $this->VideoThumbnail()) ? $thumb->URL : "";
 		self::$player_count++;
 		Requirements::javascript('dataobject_manager/code/flv/swfobject.js');
 		Requirements::customScript(sprintf(

@@ -150,7 +150,7 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 
 			$SNG = singleton($this->sourceClass);
 			foreach($this->FieldList() as $k => $title) {
-				if(! $SNG->hasField($k) && ! $SNG->hasMethod('get' . $k)) {
+				if(! $SNG->hasField($k) && ! $SNG->hasMethod('get' . $k) && ! $SNG->has_one($k)) {
 					// everything we add to select must be added to groupby too...
 					$query->select[] = $k;
 					$query->groupby[] = $k;

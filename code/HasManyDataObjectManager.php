@@ -73,7 +73,7 @@ class HasManyDataObjectManager extends DataObjectManager
 
 			$SNG = singleton($this->sourceClass);
 			foreach($this->FieldList() as $k => $title) {
-				if(! $SNG->hasField($k) && ! $SNG->hasMethod('get' . $k))
+				if(! $SNG->hasField($k) && ! $SNG->hasMethod('get' . $k) && ! $SNG->has_one($k))
 					$query->select[] = $k;
 			}
 		}

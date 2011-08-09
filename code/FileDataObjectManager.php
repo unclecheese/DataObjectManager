@@ -428,7 +428,7 @@ class FileDataObjectManager extends DataObjectManager
 					$upload_folder = $form->Fields()->fieldByName('UploadedFiles')->uploadFolder;
 					$folder_id = Folder::findOrMake($upload_folder)->ID;
 					if($this->copyOnImport && ($file->ParentID != $folder_id)) {
-						$new_file_path = $this->uploadFolder.'/'.$file->Name;
+						$new_file_path = $upload_folder.'/'.$file->Name;
 						copy($file->getFullPath(), BASE_PATH.'/'.ASSETS_DIR.'/'.$new_file_path);
 						$clone = new $file_class();
 						$clone->Filename = $new_file_path;

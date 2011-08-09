@@ -171,10 +171,10 @@ $.fn.DataObjectManager.init = function(obj) {
 		$container.find('ul:not(.ui-sortable) li.data').unbind('click').click(function(e) {
 			var $this = $(this);
 			if ($this.parent().hasClass('toggleSelect')) {
-				var $input = $this.find('input');
-				if ($input.length) {
-					$input.click();
-				}
+				var $input = $this.find('input'),
+					checker = !$input.attr('checked');
+				//don't ask me wtf is going on here!
+				$input.attr('checked',checker).click().attr('checked',checker);
 			}
 			else {
 				$this.find('a.popup-button:first').click();

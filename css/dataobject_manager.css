@@ -9,7 +9,7 @@
 
 .list .dataobject-list li div.pad {font-size:12px;padding:0 3px;float:none;}
 .list .dataobject-list li div {float:left;}
-.list .dataobject-list div.actions.col {width:9%;float:right;text-align:right;border:0;position:relative;}
+.list .dataobject-list div.actions.col {width:8%;float:right;text-align:right;border:0;position:relative;}
 .list .dataobject-list div.actions.col a {visibility:hidden;display:inline;margin:0 5px;}
 .list .dataobject-list div.actions.col input {border:0;padding:0;margin:0;background:none;}
 .list .dataobject-list li.head {font-weight:bold;font-size:12px;background:url(../images/heading_bg.gif) repeat-x top left;}
@@ -20,6 +20,8 @@
 .list .dataobject-list li.head a:hover {background:none;}
 .list .dataobject-list li {width:98.9%;overflow:hidden;border-bottom:1px solid #e4e4e4;padding:4px 5px;text-align:left;font-size:12px;}
 .list .dataobject-list li .fields-wrap {width:90%;float:left;}
+.list .dataobject-list li .drag-pointer {float:left; width:1%;}
+.list .dataobject-list li.data {line-height:25px;}
 .list .dataobject-list li .fields-wrap .col li {width:auto;border:0;padding:0;}
 .ui-sortable li {cursor:move;}
 
@@ -36,6 +38,7 @@
 .grid .dataobject-list li:hover {background:#feffe0;}
 .grid .dataobject-list li:hover .delete a {display:inline;visibility:visible;}
 .grid .dataobject-list li div.pad {padding:8px 10px;}
+.grid .dataobject-list li .drag-pointer {float:left;}
 #tooltip {max-width:300px;position: absolute;z-index: 3000;border: 1px solid #111;background-color: #eee;padding: 5px;opacity: 0.85;}
 
 
@@ -54,9 +57,9 @@
 .dataobjectmanager-actions {width:55%;float:left;height:35px;}
 .dataobjectmanager-actions.filter {padding-top:2em;height:auto;}
 .dataobjectmanager-actions a {background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;display: block;float: left;height: 24px;margin-right: 6px;padding-right: 13px;text-decoration: none;color: #333;font-size:13px;font-weight:bold;cursor:pointer;}
-.dataobjectmanager-actions a span {background: transparent url('../images/bg_button_span.gif') no-repeat;display: block;line-height: 22px;padding: 2px 0 5px 10px;font-size:12px;height:17px;} 
+.dataobjectmanager-actions a span {background: transparent url('../images/bg_button_span.gif') no-repeat;display: block;line-height: 22px;padding: 2px 0 5px 10px;font-size:12px;height:17px;}
 .dataobjectmanager-actions a:active {background: transparent url('../images/bg_button_a.gif') no-repeat scroll right -24px;;display: block;float: left;height: 24px;margin-right: 6px;padding-right: 13px;text-decoration: none;color: #333;font-size:13px;font-weight:bold;}
-.dataobjectmanager-actions a:active span {background: transparent url('../images/bg_button_span.gif') no-repeat left -24px;display: block;line-height: 22px;padding: 2px 0 5px 10px;font-size:12px;height:17px;} 
+.dataobjectmanager-actions a:active span {background: transparent url('../images/bg_button_span.gif') no-repeat left -24px;display: block;line-height: 22px;padding: 2px 0 5px 10px;font-size:12px;height:17px;}
 .AssetAdmin .dataobjectmanager-actions {margin-top:20px;height:25px;}
 .dataobjectmanager-actions a img {vertical-align:-3px;margin-right:3px;}
 .dataobjectmanager-search {width:160px;position:absolute;right:6px;top:7px;}

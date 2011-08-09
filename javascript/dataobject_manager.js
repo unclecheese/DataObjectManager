@@ -13,19 +13,19 @@ $.fn.DataObjectManager.init = function(obj) {
 		var container_id = '#'+$container.attr('id');
 		var nested = $('.DataObjectManager').hasClass('isNested');
 		if(!i18n_js)
-			i18n_js = $.fn.DataObjectManager.loadi18n(); 
-		
-		var facebox_close = function() {			
+			i18n_js = $.fn.DataObjectManager.loadi18n();
+
+		var facebox_close = function() {
 			$('#facebox').fadeOut(function() {
 				$('#facebox .content').removeClass().addClass('content');
 				$('#facebox_overlay').remove();
 				$('#facebox .loading').remove();
-				refresh($container, $container.attr('href'));		
+				refresh($container, $container.attr('href'));
 			})
 		};
-		
+
 		// Popup links
-		
+
 		// For Nested DOMs
 		if(nested) {
       $('body').append(
@@ -59,7 +59,7 @@ $.fn.DataObjectManager.init = function(obj) {
       	e.stopPropagation();
       	return false;
       });
- 			$container.addClass("loaded");   		
+ 			$container.addClass("loaded");
 		}
 		// For normal DOMs
 		else {
@@ -96,7 +96,7 @@ $.fn.DataObjectManager.init = function(obj) {
 			  });
 			  $div.fadeIn("slow");
 			  $div.find('.yes').click(function(e) {
-    			$.post($target.attr('href'),params,function() {$($target).parents('li:first').fadeOut();$(".ajax-loader").fadeOut("fast");});		  
+    			$.post($target.attr('href'),params,function() {$($target).parents('li:first').fadeOut();$(".ajax-loader").fadeOut("fast");});
           e.stopPropagation();
 			    return false;
 			  });
@@ -114,9 +114,9 @@ $.fn.DataObjectManager.init = function(obj) {
       }
 		  return false;
 		});
-		
+
 		// Refresh
-		
+
 		$container.find('a.refresh-button').unbind('click').click(function(e) {
 			$t = $(this);
 			$.post($t.attr('href'),{},function() {
@@ -124,19 +124,19 @@ $.fn.DataObjectManager.init = function(obj) {
 			});
 			return false;
 		});
-		
+
 		$container.find('a.window-link').unbind('click').click(function(e) {
 			$(this).attr('target','_blank');
 			e.stopPropagation();
 		});
-				
+
 
 		// Pagination
 		$container.find('.Pagination a').unbind('click').click(function() {
 			refresh($container, $(this).attr('href'));
 			return false;
 		});
-		
+
 		// View
 		if($container.hasClass('FileDataObjectManager') && !$container.hasClass('ImageDataObjectManager')) {
 			$container.find('a.viewbutton').unbind('click').click(function() {
@@ -144,8 +144,8 @@ $.fn.DataObjectManager.init = function(obj) {
 				return false;
 			});
 		}
-		
-		
+
+
 
 		// Sortable
 		$container.find('.sort-control input').unbind('click').click(function(e) {
@@ -166,7 +166,7 @@ $.fn.DataObjectManager.init = function(obj) {
 			tolerance : 'intersect',
 			handle : ($('.list-holder').hasClass('grid') ? '.handle' : null)
 		});
-		
+
 		// Click function for the LI
 		$container.find('ul:not(.ui-sortable) li.data').unbind('click').click(function(e) {
 			var $this = $(this);
@@ -181,8 +181,8 @@ $.fn.DataObjectManager.init = function(obj) {
 			}
 			e.stopPropagation();
 		}).css({'cursor' : 'pointer'});
-		
-		
+
+
 		// Column sort
 		if(!$container.hasClass('ImageDataObjectManager')) {
 			$container.find('li.head a').unbind('click').click(function() {
@@ -190,7 +190,7 @@ $.fn.DataObjectManager.init = function(obj) {
 				return false;
 			});
 		}
-		
+
 		// Filter
 		$container.find('.dataobjectmanager-filter select').unbind('change').change(function(e) {
 			refresh($container, $(this).attr('value'));
@@ -201,14 +201,14 @@ $.fn.DataObjectManager.init = function(obj) {
 			refresh($container, $(this).attr('value'));
 		});
 
-		
+
 		// Refresh filter
 		$container.find('.dataobjectmanager-filter .refresh').unbind('click').click(function(e) {
 			refresh($container, $container.attr('href'));
 			e.stopPropagation();
 			return false;
 		})
-	
+
 		// Search
 		var request = false;
 		$container.find('.srch_fld').focus(function() {
@@ -216,34 +216,32 @@ $.fn.DataObjectManager.init = function(obj) {
 		}).unbind('blur').blur(function() {
 			if($(this).attr('value') == '') $(this).attr('value','Search').css({'color' : '#666'});
 		}).unbind('keyup').keyup(function(e) {
-		if(e.keyCode == 13) {e.preventDefault();e.stopPropagation();return false;}
-		
-        if ((e.keyCode == 9) || // tab 
-           (e.keyCode == 16) || (e.keyCode == 17) || // shift, ctl 
+        if ((e.keyCode == 9) || (e.keyCode == 13) || // tab, enter
+           (e.keyCode == 16) || (e.keyCode == 17) || // shift, ctl
            (e.keyCode >= 18 && e.keyCode <= 20) || // alt, pause/break, caps lock
-           (e.keyCode == 27) || // esc 
-           (e.keyCode >= 33 && e.keyCode <= 35) || // page up, page down, end 
-           (e.keyCode >= 36 && e.keyCode <= 38) || // home, left, up 
-            (e.keyCode == 40) || // down 
+           (e.keyCode == 27) || // esc
+           (e.keyCode >= 33 && e.keyCode <= 35) || // page up, page down, end
+           (e.keyCode >= 36 && e.keyCode <= 38) || // home, left, up
+            (e.keyCode == 40) || // down
            (e.keyCode >= 36 && e.keyCode <= 40) || // home, left, up, right, down
-           (e.keyCode >= 44 && e.keyCode <= 45) || // print screen, insert 
-           (e.keyCode == 229) // Korean XP fires 2 keyup events, the key and 229 
-        ) return; 
-				
+           (e.keyCode >= 44 && e.keyCode <= 45) || // print screen, insert
+           (e.keyCode == 229) // Korean XP fires 2 keyup events, the key and 229
+        ) return;
+
 				if(request) window.clearTimeout(request);
 				$input = $(this);
 				request = window.setTimeout(function() {
 					url = $(container_id).attr('href').replace(/\[search\]=(.)*?&/, '[search]='+$input.attr('value')+'&');
-          refresh($container, url, '.srch_fld'); 
-					
+          refresh($container, url, '.srch_fld');
+
 				},1000)
 			e.stopPropagation();
 		});
-		
+
 		$container.find('.srch_clear').unbind('click').click(function() {
 			$container.find('.srch_fld').attr('value','').keyup();
 		});
-		
+
 
     $container.find('a.tooltip').tooltip({
 		  delay: 500,
@@ -253,8 +251,8 @@ $.fn.DataObjectManager.init = function(obj) {
 			  return $(this).parents('li').find('span.tooltip-info').html();
 		  }
     });
-    
-    
+
+
     // Add the slider to the ImageDataObjectManager
     if($container.hasClass('ImageDataObjectManager')) {
 			var MIN_IMG_SIZE = 25
@@ -262,7 +260,7 @@ $.fn.DataObjectManager.init = function(obj) {
 			var START_IMG_SIZE = 100;
 			var new_image_size;
 			$('.size-control').slider({
-				
+
 				// Stupid thing doesn't work. Have to force it with CSS
 				startValue : (START_IMG_SIZE - MIN_IMG_SIZE) / ((MAX_IMG_SIZE - MIN_IMG_SIZE) / 100),
 				slide : function(e, ui) {
@@ -270,19 +268,19 @@ $.fn.DataObjectManager.init = function(obj) {
 					$('.grid li img.image').css({'width': new_image_size+'px'});
 					$('.grid li').css({'width': new_image_size+'px', 'height' : new_image_size +'px'});
 				},
-				
+
 				stop : function(e, ui) {
-					new_image_size = MIN_IMG_SIZE + (ui.value * ((MAX_IMG_SIZE - MIN_IMG_SIZE)/100));				
+					new_image_size = MIN_IMG_SIZE + (ui.value * ((MAX_IMG_SIZE - MIN_IMG_SIZE)/100));
 					url = $(container_id).attr('href').replace(/\[imagesize\]=(.)*/, '[imagesize]='+Math.floor(new_image_size));
 					refresh($container, url);
 				}
 			});
-			
-			$('.ui-slider-handle').css({'left' : $('#size-control-wrap').attr('class').replace('position','')+'px'});    
-    
-    }  
+
+			$('.ui-slider-handle').css({'left' : $('#size-control-wrap').attr('class').replace('position','')+'px'});
+
+    }
     // RelationDataObjectManager
-    
+
     if($container.hasClass('RelationDataObjectManager')) {
 			var $checkedList = $(container_id+'_CheckedList');
 			$container.find('.actions input, .file-label input').unbind('click').click(function(e){
@@ -298,39 +296,39 @@ $.fn.DataObjectManager.init = function(obj) {
 				}
 				e.stopPropagation();
 			});
-	
+
 			$container.find('.actions input, .file-label input').each(function(i,e) {
 				if($checkedList.val().indexOf(","+$(e).val()+",") != -1)
 					$(e).attr('checked',true).parents('li').addClass('selected');
 				else
 					$(e).attr('checked',false).parents('li').removeClass('selected');
-					
-			});	
-			
+
+			});
+
 			$container.find('a[rel=clear]').unbind('click').click(function(e) {
 			 $container.find('.actions input, .file-label input').each(function(i,e) {
 			   $(e).attr('checked', false).parents('li').removeClass('selected');
 			   $checkedList.attr('value','');
 			 });
 			});
-			
+
   		$container.find('.only-related-control input').unbind('click').click(function(e) {
   			refresh($container, $(this).attr('value'));
   			$(this).attr('disabled', true);
   			e.stopPropagation();
   		});
-				
+
     }
-		
+
     // Columns. God forbid there are more than 10.
     cols = $('.list #dataobject-list li.head .fields-wrap .col').length;
     if(cols > 10) {
     	$('.list #dataobject-list li .fields-wrap .col').css({'width' : ((Math.floor(100/cols)) - 0.1) + '%' });
     }
-    
-    
-  $(".ajax-loader").fadeOut("fast");  
-    
+
+
+  $(".ajax-loader").fadeOut("fast");
+
 };
 
 $.fn.DataObjectManager.getPageHeight = function() {
@@ -341,7 +339,7 @@ $.fn.DataObjectManager.getPageHeight = function() {
       windowHeight = document.documentElement.clientHeight;
     } else if (document.body) { // other Explorers
       windowHeight = document.body.clientHeight;
-    }	
+    }
     return windowHeight;
 };
 
@@ -355,9 +353,9 @@ $.fn.DataObjectManager.getPageScroll = function() {
       xScroll = document.documentElement.scrollLeft;
     } else if (document.body) {// all other Explorers
       yScroll = document.body.scrollTop;
-      xScroll = document.body.scrollLeft;	
+      xScroll = document.body.scrollLeft;
     }
-    return new Array(xScroll,yScroll) 
+    return new Array(xScroll,yScroll)
 };
 
 $.fn.DataObjectManager.loadi18n = function() {
@@ -377,17 +375,17 @@ $.fn.DataObjectManager.loadi18n = function() {
 
 
 
-$('.DataObjectManager').ajaxSend(function(e,r,s){  
+$('.DataObjectManager').ajaxSend(function(e,r,s){
 // stupid hack for the cache killer script.
 if(s.url.indexOf('EditorToolbar') == -1)
- $(".ajax-loader").show();  
-});  
-   
-$('.DataObjectManager').ajaxStop(function(e,r,s){  
-  $(".ajax-loader").fadeOut("fast");  
-}); 
+ $(".ajax-loader").show();
+});
+
+$('.DataObjectManager').ajaxStop(function(e,r,s){
+  $(".ajax-loader").fadeOut("fast");
+});
 $('.DataObjectManager').livequery(function(){
-   $(this).DataObjectManager();                           
+   $(this).DataObjectManager();
 
 });
 
@@ -398,7 +396,7 @@ function refresh($div, link, focus)
 {
 	 // Kind of a hack. Pass the list of ids to the next refresh
 	 var listValue = ($div.hasClass('RelationDataObjectManager')) ? jQuery('#'+$div.attr('id')+'_CheckedList').val() : false;
-	 	 
+
 	 jQuery.ajax({
 	   type: "GET",
 	   url: link,
@@ -407,17 +405,20 @@ function refresh($div, link, focus)
 	   			$div.parent().html(html);
 	   		else
 				$div.replaceWith(html);
-        	
+
 			if(listValue) {
 				 jQuery('#'+$div.attr('id')+'_CheckedList').attr('value',listValue);
 			}
-     var $container = jQuery('#'+$div.attr('id')); 
-     $container.DataObjectManager(); 
-     if (typeof focus == 'string') { 
+     var $container = jQuery('#'+$div.attr('id'));
+     $container.DataObjectManager();
+     if (typeof focus == 'string') {
         $target = $container.find(focus);
         $target.focus().val($target.val());
-     } 			
+     }
 			//jQuery('#'+$div.attr('id')).DataObjectManager();
+			//Init drag function
+			TableListField.applyTo('div.TableListField');
+			DragFileItem.applyTo('#Form_EditForm_Files tr td.dragfile');
 		}
 	 });
 }

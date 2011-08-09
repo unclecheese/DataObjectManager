@@ -1,4 +1,4 @@
-<div id="$id" class="RequestHandler FormField DataObjectManager FileDataObjectManager $NestedType field" href="$CurrentLink">
+<div id="$id" class="RequestHandler FormField DataObjectManager FileDataObjectManager TableListField $NestedType field" href="$CurrentLink">
 	<div class="ajax-loader"></div>
 	<div class="dataobjectmanager-actions <% if HasFilter %>filter<% end_if %>">
 		<% if Can(add) %>
@@ -72,6 +72,15 @@
 				<% if Items %>
 				<% control Items %>
 					<li class="data" id="record-$Parent.id-$ID">
+
+						<table class="drag-pointer">
+							<tr id="record-Files-$ID">
+								<td id="drag-Files-$ID" class="dragfile" style="float: left;">
+									<img id="drag-img-Files-$ID" src="sapphire/images/drag.gif"/>
+								</td>
+							</tr>
+						</table>
+
 						<!-- LIST VIEW -->
 						<% if Top.ListView %>
 							<div class="fields-wrap">
@@ -101,9 +110,9 @@
 				<% else %>
 						<li><em><% sprintf(_t('DataObjectManager.NOITEMSFOUND','No %s found'),$PluralTitle) %></em></li>
 				<% end_if %>
-				
+
 			</ul>
-		</div>		
+		</div>
 	</div>
 	<div class="bottom-controls">
 		<div class="rounded_table_bottom_right">
@@ -116,7 +125,7 @@
 				<div class="per-page-control">
 					<% if ShowAll %><% else %>$PerPageDropdown<% end_if %>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

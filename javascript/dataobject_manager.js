@@ -391,24 +391,47 @@ $('.DataObjectManager').livequery(function(){
 
 })(jQuery);
 
-
 function refresh($div, link, focus)
 {
 	 // Kind of a hack. Pass the list of ids to the next refresh
 	 var listValue = ($div.hasClass('RelationDataObjectManager')) ? jQuery('#'+$div.attr('id')+'_CheckedList').val() : false;
 
-	 jQuery.ajax({
-	   type: "GET",
-	   url: link,
-	   success: function(html){
-	   		if(!$div.next().length && !$div.prev().length)
-	   			$div.parent().html(html);
-	   		else
-				$div.replaceWith(html);
+  // Make a list of all ids so we can detect newly created ones
+	var all = ',';
+	$div.find('li.data input:checkbox').each(function(i, el) {
+		all += el.value + ',';
+	});
 
+	jQuery.ajax({
+		type : "GET",
+		url : link,
+		success : function(html) {
+			if (!$div.next().length && !$div.prev().length)
+				$div.parent().html(html);
+			else
+				$div.replaceWith(html);
+				
 			if(listValue) {
 				 jQuery('#'+$div.attr('id')+'_CheckedList').attr('value',listValue);
-			}
+			// Add newly created items in if checked
+			jQuery(html).find('li.data input:checkbox')
+					.each(
+							function(i, el) {
+								el = jQuery(el);
+								if (el.attr('checked')
+										&& jQuery.inArray(el.val(), all
+												.split(',')) == -1) {
+									jQuery(
+											'#' + $div.attr('id')
+													+ '_CheckedList').val(
+											jQuery(
+													'#' + $div.attr('id')
+															+ '_CheckedList')
+													.val()
+													+ el.val() + ',');
+								}
+							});
+
      var $container = jQuery('#'+$div.attr('id'));
      $container.DataObjectManager();
      if (typeof focus == 'string') {
@@ -420,5 +443,5 @@ function refresh($div, link, focus)
 			TableListField.applyTo('div.TableListField');
 			DragFileItem.applyTo('#Form_EditForm_Files tr td.dragfile');
 		}
-	 });
+	});
 }

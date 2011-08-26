@@ -413,6 +413,7 @@ function refresh($div, link, focus)
 				
 			if(listValue) {
 				 jQuery('#'+$div.attr('id')+'_CheckedList').attr('value',listValue);
+			}
 			// Add newly created items in if checked
 			jQuery(html).find('li.data input:checkbox')
 					.each(

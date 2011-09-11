@@ -1,17 +1,15 @@
 <?php
 global $lang;
 
+$lang['de_DE']['DataObjectManager']['DESELECTALL'] = 'alle abwählen';
+$lang['de_DE']['DataObjectManager']['ONLYRELATED'] = 'Nur ausgewählte anzeigen';
 $lang['de_DE']['DataObjectManager']['ADD'] = 'Hinzufügen:';
 $lang['de_DE']['DataObjectManager']['ADDEDNEW'] = '%s erfolgreich hinzugefügt';
-$lang['de_DE']['DataObjectManager']['ADDITEM'] = array(
-	'%s hinzufügen',
-	PR_MEDIUM,
-	'Hinzufügen: [name]'
-);
+$lang['de_DE']['DataObjectManager']['ADDITEM'] = '%s hinzufügen';
 $lang['de_DE']['DataObjectManager']['ALLOWEDFILETYPES'] = 'Es sind nur %s Dateien erlaubt.';
 $lang['de_DE']['DataObjectManager']['DELETE'] = 'Löschen';
 $lang['de_DE']['DataObjectManager']['DISPLAYING'] = 'Zeige';
-$lang['de_DE']['DataObjectManager']['DRAGDROP'] = 'Erlaube Drag & Drop neuordnen';
+$lang['de_DE']['DataObjectManager']['DRAGDROP'] = 'Drag & Drop neuordnen';
 $lang['de_DE']['DataObjectManager']['ERROR'] = 'Fehler';
 $lang['de_DE']['DataObjectManager']['IMPORTFROMFOLDER'] = 'Importieren aus einem existierenden Ordner';
 $lang['de_DE']['DataObjectManager']['NOFILTER'] = 'Kein Filter';
@@ -21,7 +19,7 @@ $lang['de_DE']['DataObjectManager']['PERPAGERESULTS'] = 'Resultate pro Seite';
 $lang['de_DE']['DataObjectManager']['PERPAGESHOW'] = 'zeige';
 $lang['de_DE']['DataObjectManager']['REFRESH'] = 'aktualisieren';
 $lang['de_DE']['DataObjectManager']['SAVE'] = 'Speichern';
-$lang['de_DE']['DataObjectManager']['SAVEANDADD'] = 'Speichere und neu: %s';
+$lang['de_DE']['DataObjectManager']['SAVEANDADD'] = 'Speichern und %s hinzufügen';
 $lang['de_DE']['DataObjectManager']['SAVED'] = '%s erfolgreich gespeichert';
 $lang['de_DE']['DataObjectManager']['SEARCH'] = 'Suchen';
 $lang['de_DE']['DataObjectManager']['SELECTFOLDER'] = 'Wählen Sie einen Ordner';
@@ -38,4 +36,3 @@ $lang['de_DE']['DataObjectManager_popup.ss']['PREVIOUS'] = 'Zurück';
 $lang['de_DE']['FileDataObjectManager']['GRIDVIEW'] = 'Miniaturansicht';
 $lang['de_DE']['FileDataObjectManager']['LISTVIEW'] = 'Listenansicht';
 $lang['de_DE']['FileDataObjectManager']['SWFUPLOAD'] = 'DataObjectManager benötigt das SWFUpload Modul.';
-?>

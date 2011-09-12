@@ -1,0 +1,12 @@
+[2011-08-25 15:32:25] ffmpeg 
+[2011-08-25 15:32:26] sh: ffmpeg: command not found
+
+[2011-08-25 15:32:46] ffmpeg 
+[2011-08-25 15:32:46] sh: ffmpeg: command not found
+
+[2011-08-25 15:36:23] ffmpeg 
+[2011-08-25 15:36:23] sh: ffmpeg: command not found
+
+[2011-08-25 16:59:48] ffmpeg 
+[2011-08-25 16:59:49] sh: ffmpeg: command not found
+

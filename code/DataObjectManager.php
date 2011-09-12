@@ -160,6 +160,9 @@ class DataObjectManager extends ComplexTableField
 		    $this->hasNested = true;
 		    $this->setPopupWidth(850);
 		  }
+		  elseif(class_exists("KickAssetField") && $field instanceof KickAssetField) {
+			$this->setPopupWidth(1150);
+		  }
 		}
 
 	}

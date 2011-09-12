@@ -418,6 +418,7 @@ function refresh($div, link, focus)
 			//jQuery('#'+$div.attr('id')).DataObjectManager();
 			//Init drag function
 			TableListField.applyTo('div.TableListField');
+			if(typeof DragFileItem != "undefined")
 			DragFileItem.applyTo('#Form_EditForm_Files tr td.dragfile');
 		}
 	 });

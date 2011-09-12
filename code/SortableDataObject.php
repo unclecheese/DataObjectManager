@@ -65,7 +65,7 @@ class SortableDataObject extends DataObjectDecorator
 			if(is_subclass_of($classname, $class))
 				return true;
 		}
-		return false;
+		return Object::has_extension($classname, 'SortableDataObject');
 			
 	}
 	

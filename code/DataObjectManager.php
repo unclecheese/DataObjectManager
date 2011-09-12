@@ -492,7 +492,7 @@ class DataObjectManager extends ComplexTableField
 		
 	public function Sortable()
 	{
-		return SortableDataObject::is_sortable_class($this->sourceClass());
+		return DataObject::has_extension($this->sourceClass(), 'SortableDataObject');
 	}
 	
 	public function setFilter($field, $label, $map, $default = null)

@@ -72,6 +72,7 @@ class SimpleHTMLEditorField extends TextareaField
 	
 	public function FieldHolder()
 	{
+		Requirements::javascript(THIRDPARTY_DIR."/jquery/jquery.js");
 		Requirements::javascript('dataobject_manager/javascript/jquery.wysiwyg.js');
 		Requirements::css('dataobject_manager/css/jquery.wysiwyg.css');
 		Requirements::customScript("

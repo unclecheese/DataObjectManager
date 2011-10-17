@@ -181,10 +181,8 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 			
 	function ExtraData() {
 		$items = array();
-		foreach($this->unpagedSourceItems as $item) {
-			if($item->{$this->joinField})
-				$items[] = $item->ID;
-		}
+		// changed to avoid having to use $this->unpagedSourceItems because it fails on large datasets
+		$items = $this->getSelectedIDs();
 		$list = implode(',', $items);
 		$value = ",";
 		$value .= !empty($list) ? $list."," : "";
@@ -195,8 +193,25 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 		<input id="$inputId" name="{$this->name}[{$this->htmlListField}]" type="hidden" value="$value"/>
 HTML;
 	}
-	
-	
+
+	/**
+	 * Returns the list of IDs that should be checked in the list.
+	 * @see HasManyDataObjectManager::getSelectedIDs()
+	 * @return array
+	 */
+	function getSelectedIDs() {
+		$ids = array();
+		$dataQuery = $this->getQuery();
+		$dataQuery->having("Checked = '1'");
+		$records = $dataQuery->execute();
+		$class = $this->sourceClass;
+		foreach($records as $record) {
+			$item = new $class($record);
+			$ids[] = $item->ID;
+		}
+		return $ids;
+	}
+
    public function Sortable() 
    { 
       return ( 

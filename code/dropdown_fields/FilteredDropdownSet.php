@@ -33,7 +33,11 @@ class FilteredDropdownSet extends FieldGroup {
 		Requirements::javascript(THIRDPARTY_DIR.'/jquery-metadata/jquery.metadata.js');
 		Requirements::javascript('dataobject_manager/code/dropdown_fields/javascript/filtered_dropdown_set.js');
 		foreach($this->children as $child) {
-			$child->addExtraClass("{'updateLink': '".$this->Link('update')."'}");
+			$meta = "'updateLink': '".$this->Link('update')."'";
+			if($str = $child->getEmptyString()) {
+				$meta .= ",'emptyString': '".$child->getEmptyString()."'";
+			}
+			$child->addExtraClass("{".$meta."}");
 		}
 		return parent::FieldHolder();
 	}
@@ -41,13 +45,15 @@ class FilteredDropdownSet extends FieldGroup {
 	
 	public function update(SS_HTTPRequest $r) {
 		$ret = array();
+		$filter = null;
 		if($filter = $r->requestVar('q')) {
-			$results = DataObject::get($this->sourceClass, "{$this->filteredField} = '".Convert::raw2sql($filter)."'");
-			if($results) {
-				foreach($results as $r) {
-					$ret[$r->{$this->returnKey}] = $r->{$this->returnLabel};
-				}
-			}		
+			$filter = "{$this->filteredField} = '".Convert::raw2sql($filter)."'";
+		}
+		$results = DataObject::get($this->sourceClass, $filter);
+		if($results) {
+			foreach($results as $r) {
+				$ret[$r->{$this->returnKey}] = $r->{$this->returnLabel};
+			}				
 		}
 		return Convert::array2json($ret);
 	}

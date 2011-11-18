@@ -1,4 +1,4 @@
 <div class="dataobjectmanager_holder">
 	<h3>$PluralTitle</h3>
-	<p>You may add $PluralTitle once you have saved for the first time.</p>
+	<p><% sprintf(_t('ADDAFTERSAVE','You may add %s once you have saved for the first time.'),$PluralTitle) %></p>
 </div>	

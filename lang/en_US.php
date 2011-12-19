@@ -14,6 +14,7 @@ $lang['en_US']['DataObjectManager']['DELETE'] = 'Delete';
 $lang['en_US']['DataObjectManager']['DISPLAYING'] = 'Displaying';
 $lang['en_US']['DataObjectManager']['DRAGDROP'] = 'Allow drag &amp; drop reordering';
 $lang['en_US']['DataObjectManager']['ERROR'] = 'Error';
+$lang['en_US']['DataObjectManager']['EXPORT'] = 'Export %s';
 $lang['en_US']['DataObjectManager']['IMPORTFROMFOLDER'] = 'Import from an existing folder';
 $lang['en_US']['DataObjectManager']['NOFILTER'] = 'No filter';
 $lang['en_US']['DataObjectManager']['NOITEMSFOUND'] = 'No %s found';

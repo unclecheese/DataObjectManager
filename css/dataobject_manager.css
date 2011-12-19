@@ -68,6 +68,9 @@
 .dataobjectmanager-search .sbox input {background: white url('../images/srch_bg.gif') repeat-x top left;float: left;border: 0;height: 13px; width: 112px;padding: 3px;font: 11px/13px arial;color: #666;}
 .dataobjectmanager-search .srch_clear {background: white url('../images/srch_r_f2.gif') no-repeat top left;}
 
+.dataobjectmanager-button {position: absolute; top: 5px; left: 5px; padding: 2px 0px; background-color: #eee; border-color: #CCCCCC #999999 #999999 #CCCCCC; border-style: double; border-width: 2px;}
+.dataobjectmanager-button a {padding: 5px 5px; font-size: 1.1em; color: #333; text-decoration: none;}
+.dataobjectmanager-button a:hover {background-color: #f4f4f4;}
 
 .dataobjectmanager-filter {position:relative;width:30%;float:right;text-align:right;}
 .dataobjectmanager-filter select {width:100%;max-width:250px;}

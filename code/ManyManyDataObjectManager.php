@@ -202,7 +202,7 @@ HTML;
 	function getSelectedIDs() {
 		$ids = array();
 		$dataQuery = $this->getQuery();
-		$dataQuery->having("Checked = '1'");
+		$dataQuery->where("Checked = '1'");
 		$records = $dataQuery->execute();
 		$class = $this->sourceClass;
 		foreach($records as $record) {

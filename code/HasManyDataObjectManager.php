@@ -151,7 +151,7 @@ HTML;
 	function getSelectedIDs() {
 		$ids = array();
 		$dataQuery = $this->getQuery();
-		$dataQuery->having("{$this->joinField} = '{$this->controller->ID}'");
+		$dataQuery->where("\"{$this->joinField}\" = '{$this->controller->ID}'");
 		$records = $dataQuery->execute();
 		$class = $this->sourceClass;
 		foreach($records as $record) {

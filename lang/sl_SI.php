@@ -3,6 +3,7 @@
 global $lang;
 
 $lang['sl_SI']['DataObjectManager']['ADD'] = 'Dodaj';
+$lang['sl_SI']['DataObjectManager']['ADDAFTERSAVE'] = 'Najprej shranite, potem boste lahko dodali %s.';
 $lang['sl_SI']['DataObjectManager']['ADDEDNEW'] = 'Uspešno dodan nov %s';
 $lang['sl_SI']['DataObjectManager']['ADDITEM'] = 'Dodaj %s';
 $lang['sl_SI']['DataObjectManager']['ALLOWEDFILETYPES'] = 'Dovoljene so samo datoteke tipa %s';
@@ -12,7 +13,7 @@ $lang['sl_SI']['DataObjectManager']['DRAGDROP'] = 'Dovoli razvrščanje s funkci
 $lang['sl_SI']['DataObjectManager']['ERROR'] = 'Napaka';
 $lang['sl_SI']['DataObjectManager']['IMPORTFROMFOLDER'] = 'Uvozi iz mape';
 $lang['sl_SI']['DataObjectManager']['NOFILTER'] = 'Brez filtra';
-$lang['sl_SI']['DataObjectManager']['NOITEMSFOUND'] = 'Ne najdem %s';
+$lang['sl_SI']['DataObjectManager']['NOITEMSFOUND'] = 'Ne najdem objektov.';
 $lang['sl_SI']['DataObjectManager']['OF'] = 'od';
 $lang['sl_SI']['DataObjectManager']['PERPAGERESULTS'] = 'zadetkov na stran';
 $lang['sl_SI']['DataObjectManager']['PERPAGESHOW'] = 'Prikaži';

@@ -202,7 +202,7 @@ HTML;
 	function getSelectedIDs() {
 		$ids = array();
 		$dataQuery = $this->getQuery();
-		$dataQuery->where("Checked = '1'");
+		$dataQuery->where("(\"$this->manyManyTable\".\"{$this->manyManyParentClass}ID\" IS NOT NULL)");		
 		$records = $dataQuery->execute();
 		$class = $this->sourceClass;
 		foreach($records as $record) {

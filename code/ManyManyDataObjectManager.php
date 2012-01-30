@@ -191,6 +191,7 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 		return <<<HTML
 		<input name="controllerID" type="hidden" value="$controllerID" />
 		<input id="$inputId" name="{$this->name}[{$this->htmlListField}]" type="hidden" value="$value"/>
+		<input id="{$inputId}_UnChecked" name="{$this->name}[{$this->htmlListField}_UnChecked]" type="hidden" value=""/>
 HTML;
 	}
 

@@ -73,7 +73,7 @@
 				<% control Items %>
 					<li class="data" id="record-$Parent.id-$ID">
 
-						<% if Top.isDraggable %>
+						<% if Top.isDragable %>
 						<table class="drag-pointer">
 							<tr id="record-Files-$ID">
 								<td id="drag-Files-$ID" class="dragfile" style="float: left;">

@@ -18,7 +18,7 @@ class FileDataObjectManager extends DataObjectManager
 	protected $limitFileTypes;
 	protected $uploadLimit;
 	protected $allowUploadFolderSelection = true;
-	protected $isDraggable = true;
+	protected $isDragable = true;
 	protected $enableUploadDebugging = false;
 	public $hasDataObject = true;
 	public $importClass = "File";
@@ -216,7 +216,7 @@ class FileDataObjectManager extends DataObjectManager
 		$this->allowUploadFolderSelection = true;
 	}
 	
-	public function isDraggable()
+	public function isDragable()
 	{
 		return $this->isDraggable ? true : false;
 	}

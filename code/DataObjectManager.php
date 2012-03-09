@@ -268,8 +268,8 @@ class DataObjectManager extends ComplexTableField
 	}
 	
 	public function getSetting($setting)
-	{
-	   if($this->$setting) {
+	{	
+	   if($this->$setting !== null) {
 	     return $this->$setting;
 	   }
 	   return Object::get_static($this->class,DOMUtil::to_underscore($setting));

@@ -101,7 +101,7 @@ class SortableDataObject extends DataObjectDecorator
             if(stristr($from,$join_table)) {
               $sort_field = "\"$join_table\".\"SortOrder\"";
               if(isset($query->select['SortOrder'])) {
-              	$query->select['SortOrder'] = "\"{$this->owner->class}\".SortOrder AS LocalSort";
+              	$query->select['SortOrder'] = "$sort_field AS LocalSort";
               }
               break;
             }

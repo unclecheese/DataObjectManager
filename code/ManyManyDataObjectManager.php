@@ -60,7 +60,7 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 			$sourceField = 'Child';
 		$parentID = $this->controller->ID;
 		
-		$this->sourceJoin .= " LEFT JOIN \"$manyManyTable\" ON (\"$source\".\"ID\" = \"{$sourceField}ID\" AND \"$manyManyTable\".\"{$this->manyManyParentClass}ID\" = '$parentID')";
+		$this->sourceJoin .= " LEFT JOIN \"$manyManyTable\" ON (\"$source\".\"ID\" = \"$manyManyTable\".\"{$sourceField}ID\" AND \"$manyManyTable\".\"{$this->manyManyParentClass}ID\" = '$parentID')";
 		
 		$this->joinField = 'Checked';
 		if(isset($_REQUEST['ctf'][$this->Name()]['only_related']))

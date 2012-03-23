@@ -140,6 +140,7 @@ class HasManyDataObjectManager extends DataObjectManager
 		$inputId = $this->id() . '_' . $this->htmlListEndName;
 		return <<<HTML
 		<input id="$inputId" name="{$this->name}[{$this->htmlListField}]" type="hidden" value="{$value}"/>
+		<input id="{$inputId}_UnChecked" name="{$this->name}[{$this->htmlListField}_UnChecked]" type="hidden" value=""/>
 HTML;
 	}
 

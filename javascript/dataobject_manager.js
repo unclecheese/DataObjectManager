@@ -293,6 +293,11 @@ $.fn.DataObjectManager.init = function(obj) {
 					$(this).parents('li').toggleClass('selected');
 					val = ($(this).attr('checked')) ? $checkedList.val() + $(this).val()+"," : $checkedList.val().replace(","+$(this).val()+",",",");
 					$checkedList.attr('value', val);
+                    
+                    
+                    $uCheckedList=$(container_id+'_CheckedList_UnChecked');
+                    uVal = ($(this).attr('checked')==false ? $uCheckedList.val() + $(this).val()+"," : $uCheckedList.val().replace(","+$(this).val()+",",","));
+                    $(container_id+'_CheckedList_UnChecked').val(uVal);
 				}
 				e.stopPropagation();
 			});
@@ -395,6 +400,7 @@ function refresh($div, link, focus)
 {
 	 // Kind of a hack. Pass the list of ids to the next refresh
 	 var listValue = ($div.hasClass('RelationDataObjectManager')) ? jQuery('#'+$div.attr('id')+'_CheckedList').val() : false;
+     var uncheckedListValue = ($div.hasClass('RelationDataObjectManager')) ? jQuery('#'+$div.attr('id')+'_CheckedList_UnChecked').val() : false;
 
   // Make a list of all ids so we can detect newly created ones
 	var all = ',';
@@ -414,6 +420,7 @@ function refresh($div, link, focus)
 			if(listValue) {
 				 jQuery('#'+$div.attr('id')+'_CheckedList').attr('value',listValue);
 			}
+            
 			// Add newly created items in if checked
 			jQuery(html).find('li.data input:checkbox')
 					.each(
@@ -421,7 +428,7 @@ function refresh($div, link, focus)
 								el = jQuery(el);
 								if (el.attr('checked')
 										&& jQuery.inArray(el.val(), all
-												.split(',')) == -1) {
+												.split(',')) == -1 && jQuery.inArray(el.val(), listValue.split(',')) == -1 && jQuery.inArray(el.val(), uncheckedListValue.split(',')) == -1) {
 									jQuery(
 											'#' + $div.attr('id')
 													+ '_CheckedList').val(
@@ -432,6 +439,10 @@ function refresh($div, link, focus)
 													+ el.val() + ',');
 								}
 							});
+            
+            //Migrate unchecked
+            jQuery('#'+$div.attr('id')+'_CheckedList_UnChecked').val(uncheckedListValue);
+            
 
      var $container = jQuery('#'+$div.attr('id'));
      $container.DataObjectManager();

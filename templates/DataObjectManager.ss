@@ -87,10 +87,13 @@
 	<div class="bottom-controls">
 		<div class="rounded_table_bottom_right">
 			<div class="rounded_table_bottom_left">
-				<div class="sort-control">
-					<% if Sortable %>
+				<% if Sortable %>
+					<div class="sort-control">
 						<input id="showall-{$id}" type="checkbox" <% if ShowAll %>checked="checked"<% end_if %> value="<% if Paginated %>$ShowAllLink<% else %>$PaginatedLink<% end_if %>" /><label for="showall-{$id}"><% _t('DataObjectManager.DRAGDROP','Allow drag &amp; drop reordering') %></label>
-					<% end_if %>
+					</div>
+				<% end_if %>
+				<div class="dataobjectmanager-button">
+					<a href="$ExportLink"><% sprintf(_t('DataObjectManager.EXPORT','Export %s'),$PluralTitle) %></span></a>
 				</div>
 				<div class="per-page-control">
 					<% if ShowAll %><% else %>$PerPageDropdown<% end_if %>

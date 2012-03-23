@@ -11,6 +11,7 @@ $lang['de_DE']['DataObjectManager']['DELETE'] = 'Löschen';
 $lang['de_DE']['DataObjectManager']['DISPLAYING'] = 'Zeige';
 $lang['de_DE']['DataObjectManager']['DRAGDROP'] = 'Drag & Drop neuordnen';
 $lang['de_DE']['DataObjectManager']['ERROR'] = 'Fehler';
+$lang['de_DE']['DataObjectManager']['EXPORT'] = '%s exportieren';
 $lang['de_DE']['DataObjectManager']['IMPORTFROMFOLDER'] = 'Importieren aus einem existierenden Ordner';
 $lang['de_DE']['DataObjectManager']['NOFILTER'] = 'Kein Filter';
 $lang['de_DE']['DataObjectManager']['NOITEMSFOUND'] = 'Keine %s gefunden';

@@ -484,6 +484,10 @@ class DataObjectManager extends ComplexTableField
 	    return Controller::join_links($this->BaseLink(), 'add', ((Translatable::is_enabled()) ? '?locale=' . Translatable::get_current_locale() : ''));
 	}
 		
+	public function ExportLink() {
+	    return Controller::join_links($this->BaseLink(), 'export');
+	}
+	
 	public function ShowAll()
 	{
 		return $this->showAll == "1";

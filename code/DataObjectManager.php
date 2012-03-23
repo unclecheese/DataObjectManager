@@ -264,7 +264,11 @@ class DataObjectManager extends ComplexTableField
 		$sort_dir = isset($params['sort_dir'])? $params['sort_dir'] :	$this->sort_dir;
 		$filter   = isset($params['filter'])? $params['filter'] 	: 	$this->filter;
 		$search   = isset($params['search'])? $params['search'] 	: 	$this->search;
-		return "ctf[{$this->Name()}][start]={$start}&ctf[{$this->Name()}][per_page]={$per_page}&ctf[{$this->Name()}][showall]={$show_all}&ctf[{$this->Name()}][sort]={$sort}&ctf[{$this->Name()}][sort_dir]={$sort_dir}&ctf[{$this->Name()}][search]={$search}&ctf[{$this->Name()}][filter]={$filter}";
+		
+		// Restrict to the current locale if the DataObject is Translatable
+		$locale = (Translatable::is_enabled()) ? 'locale=' . Translatable::get_current_locale() . '&' : '';
+		
+		return "{$locale}ctf[{$this->Name()}][start]={$start}&ctf[{$this->Name()}][per_page]={$per_page}&ctf[{$this->Name()}][showall]={$show_all}&ctf[{$this->Name()}][sort]={$sort}&ctf[{$this->Name()}][sort_dir]={$sort_dir}&ctf[{$this->Name()}][search]={$search}&ctf[{$this->Name()}][filter]={$filter}";
 	}
 	
 	public function getSetting($setting)
@@ -477,7 +481,7 @@ class DataObjectManager extends ComplexTableField
 	}
 
 	public function AddLink() {
-	    return Controller::join_links($this->BaseLink(), 'add');
+	    return Controller::join_links($this->BaseLink(), 'add', ((Translatable::is_enabled()) ? '?locale=' . Translatable::get_current_locale() : ''));
 	}
 		
 	public function ShowAll()

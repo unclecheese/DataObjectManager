@@ -20,7 +20,9 @@ $.fn.DataObjectManager.init = function(obj) {
 				$('#facebox .content').removeClass().addClass('content');
 				$('#facebox_overlay').remove();
 				$('#facebox .loading').remove();
-				refresh($container, $container.attr('href'));
+				$(".DataObjectManager").each(function() {
+					refresh($(this), $(this).attr('href'));
+				});
 			})
 		};
 

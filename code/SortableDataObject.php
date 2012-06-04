@@ -118,8 +118,9 @@ class SortableDataObject extends DataObjectDecorator
  	public function onBeforeWrite()
 	{
 		if(!$this->owner->ID) {
-			if($peers = DataObject::get($this->owner->class))
-				$this->owner->SortOrder = $peers->Count()+1;
+		    $sql = new SQLQuery("count(ID)", array_shift(ClassInfo::dataClassesFor($this->owner->class)));
+		    $val = $sql->execute()->value();
+		    $this->owner->SortOrder = is_numeric($val)?$val+1:1;
 		}
 	}	
 

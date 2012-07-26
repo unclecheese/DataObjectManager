@@ -39,8 +39,8 @@
 		</div>
 	</div>
 	<div class="list column{$Headings.Count}" class="list-holder" style="width:100%;">
-		<div class="dataobject-list">	
-			<ul class="<% if ShowAll %>sortable-{$SortableClass}<% end_if %><% if ClickToToggle %> toggleSelect<% end_if %>">
+		<div class="dataobject-list<% if ClickToToggle %> toggleSelect<% end_if %>">
+			<ul class="<% if ShowAll %>sortable-{$SortableClass}<% end_if %>">
 				<li class="head">
 					<div class="fields-wrap">
 					<% control Headings %>
@@ -100,7 +100,7 @@
   					   <input id="only-related-{$id}" type="checkbox" <% if OnlyRelated %>checked="checked"<% end_if %> value="<% if OnlyRelated %>$AllRecordsLink<% else %>$OnlyRelatedLink<% end_if %>" /><label for="only-related-{$id}"><% _t('DataObjectManager.ONLYRELATED','Show only related records') %></label>
             </div>
           <% end_if %>
-			  <% end_if %>				
+			  <% end_if %>
 				<div class="per-page-control">
 					<% if ShowAll %><% else %>$PerPageDropdown<% end_if %>
 				</div>
@@ -108,5 +108,5 @@
 		</div>
 	</div>
 	</div>
-	$ExtraData	
+	$ExtraData
 </div>

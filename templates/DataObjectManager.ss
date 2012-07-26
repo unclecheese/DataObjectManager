@@ -4,7 +4,7 @@
 		<% if Can(add) %>
 			<a class="popup-button" rel="$PopupWidth" href="$AddLink" alt="add">
 				<span class="uploadlink"><img src="dataobject_manager/images/add.png" alt="" /><% sprintf(_t('DataObjectManager.ADDITEM','Add %s',PR_MEDIUM,'Add [name]'),$AddTitle) %></span>
-			</a>	
+			</a>
 		<% else %>
 		  <h3>$PluralTitle</h3>
 		<% end_if %>
@@ -39,8 +39,8 @@
 		</div>
 	</div>
 	<div class="list column{$Headings.Count}" class="list-holder" style="width:100%;">
-		<div class="dataobject-list">		
-			<ul class="<% if ShowAll %>sortable-{$sourceClass}<% end_if %><% if ClickToToggle %> toggleSelect<% end_if %>">
+		<div class="dataobject-list<% if ClickToToggle %> toggleSelect<% end_if %>">
+			<ul class="<% if ShowAll %>sortable-{$sourceClass}<% end_if %>">
 				<li class="head">
 					<div class="fields-wrap">
 					<% control Headings %>
@@ -87,13 +87,10 @@
 	<div class="bottom-controls">
 		<div class="rounded_table_bottom_right">
 			<div class="rounded_table_bottom_left">
-				<% if Sortable %>
-					<div class="sort-control">
+				<div class="sort-control">
+					<% if Sortable %>
 						<input id="showall-{$id}" type="checkbox" <% if ShowAll %>checked="checked"<% end_if %> value="<% if Paginated %>$ShowAllLink<% else %>$PaginatedLink<% end_if %>" /><label for="showall-{$id}"><% _t('DataObjectManager.DRAGDROP','Allow drag &amp; drop reordering') %></label>
-					</div>
-				<% end_if %>
-				<div class="dataobjectmanager-button">
-					<a href="$ExportLink"><% sprintf(_t('DataObjectManager.EXPORT','Export %s'),$PluralTitle) %></span></a>
+					<% end_if %>
 				</div>
 				<div class="per-page-control">
 					<% if ShowAll %><% else %>$PerPageDropdown<% end_if %>

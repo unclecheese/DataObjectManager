@@ -776,10 +776,8 @@ class DataObjectManager_Controller extends Controller
 	            }
 	            if(!isset($relationName)) return false;
 	            list($parentClass, $componentClass, $componentField, $parentField, $table) = singleton($ownerClass)->many_many($relationName);
-				Debug::dump(singleton($ownerClass)->many_many($relationName));
 	            foreach($map as $sort => $id)
 	              DB::query("UPDATE \"$table\" SET \"SortOrder\" = $sort WHERE \"{$componentField}\" = $id AND \"{$parentField}\" = $controllerID");
-				  Debug::dump("UPDATE \"$table\" SET \"SortOrder\" = $sort WHERE \"{$componentField}\" = $id AND \"{$parentField}\" = $controllerID");
 	          }
 	          else {
 	            foreach($map as $sort => $id) {

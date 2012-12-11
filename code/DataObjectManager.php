@@ -238,8 +238,12 @@ class DataObjectManager extends ComplexTableField
 			$search = array();
 	        $SNG = singleton($this->sourceClass);
 			foreach(parent::Headings() as $field) {
+				// If the source class doesn't own this field, then its parent might.
+				while(!$SNG->hasOwnTableDatabaseField($field->Name) && $parentKls = get_parent_class($SNG->class)) {
+					$SNG = singleton($parentKls);
+				}
 				if($SNG->hasDatabaseField($field->Name))
-					$search[] = "UPPER({$this->sourceClass}.$field->Name) LIKE '%".Convert::raw2sql(strtoupper($this->search))."%'";
+					$search[] = "UPPER({$SNG->class}.$field->Name) LIKE '%".Convert::raw2sql(strtoupper($this->search))."%'";
 			}
 			if(!empty($search)) {
 				$search_string = "(".implode(" OR ", $search).")";

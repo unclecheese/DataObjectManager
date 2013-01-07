@@ -773,15 +773,16 @@ class DataObjectManager_Controller extends Controller
 	            $candidates = singleton($ownerClass)->many_many();
 	            if(is_array($candidates)) {
 	              foreach($candidates as $name => $class)
-	                if($class == $className) {
+	                if($class == $className and substr($group, -strlen($name)-1) == '_'.$name) {
 	                  $relationName = $name;
 	                  break;
 	                }
 	            }
 	            if(!isset($relationName)) return false;
-	            list($parentClass, $componentClass, $componentField, $parentField, $table) = singleton($ownerClass)->many_many($relationName);
-	            foreach($map as $sort => $id)
+	            list($parentClass, $componentClass, $parentField, $componentField, $table) = singleton($ownerClass)->many_many($relationName);
+	            foreach($map as $sort => $id) {
 	              DB::query("UPDATE \"$table\" SET \"SortOrder\" = $sort WHERE \"{$componentField}\" = $id AND \"{$parentField}\" = $controllerID");
+				}
 	          }
 	          else {
 	            foreach($map as $sort => $id) {

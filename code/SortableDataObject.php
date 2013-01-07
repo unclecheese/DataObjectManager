@@ -48,7 +48,7 @@ class SortableDataObject extends DataObjectDecorator
     if(!isset(self::$many_many_sortable_relations[$componentClass]))
       self::$many_many_sortable_relations[$componentClass] = array();
       
-    self::$many_many_sortable_relations[$componentClass][$parentClass] = $table;
+    self::$many_many_sortable_relations[$componentClass][$parentClass][] = $table;
     self::add_sortable_class($componentClass);
 	} 
 	
@@ -90,28 +90,37 @@ class SortableDataObject extends DataObjectDecorator
 	}
 	
 	
-	public function augmentSQL(SQLQuery &$query)
-	{
-	   if(empty($query->select) || $query->delete || in_array("COUNT(*)",$query->select) || in_array("count(*)",$query->select)) return;
-	   $sort_field = false;
-	   if($join_tables = self::get_join_tables($this->owner->class)) {
-       foreach($query->from as $from) {
-          if($sort_field) break;
-          foreach($join_tables as $join_table) {
-            if(stristr($from,$join_table)) {
-              $sort_field = "\"$join_table\".\"SortOrder\"";
-              if(isset($query->select['SortOrder'])) {
-              	$query->select['SortOrder'] = "$sort_field AS LocalSort";
-              }
-              break;
-            }
-          }
-       }
-	   }
-	   if(!$sort_field) $sort_field = "\"SortOrder\"";
-	   
-	   if(!$query->orderby || ($query->orderby == $this->owner->stat('default_sort')))
-	     $query->orderby = "$sort_field " . self::$sort_dir;
+	public function augmentSQL(SQLQuery &$query) {
+		if(empty($query->select) || $query->delete || in_array("COUNT(*)",$query->select) || in_array("count(*)",$query->select))
+			return;
+
+		$sort_field = false;
+		if($join_classes = self::get_join_tables($this->owner->class)) {
+			foreach($query->from as $from) {
+				if($sort_field)
+					break;
+				foreach($join_classes as $join_tables) {
+					if($sort_field)
+						break;
+					foreach ($join_tables as $join_table) {
+						if(stristr($from,$join_table)) {
+							$sort_field = "\"$join_table\".\"SortOrder\"";
+							if(isset($query->select['SortOrder'])) {
+								$query->select['SortOrder'] = "$sort_field AS LocalSort";
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		if(!$sort_field)
+			$sort_field = "\"SortOrder\"";
+
+		if(!$query->orderby or $query->orderby == $this->owner->stat('default_sort')) {
+			$query->orderby = "$sort_field " . self::$sort_dir;
+		}
 	}
 	
 

@@ -207,17 +207,17 @@ class DataObjectManager extends ComplexTableField
 		if($this->ShowAll())
 			$this->setPageSize(999);
 
-		if($this->Sortable() && (!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == "SortOrder")) {
+		$frontendSort = empty($_REQUEST['ctf'][$this->Name()]['sort'])
+			? null
+			: $_REQUEST['ctf'][$this->Name()]['sort'];
+		if($this->Sortable() && (empty($frontendSort) || $frontendSort == "SortOrder")) {
 			$this->sort = "SortOrder";
 			$this->sourceSort = "\"SortOrder\" ASC";
-		}
-		elseif(isset($_REQUEST['ctf'][$this->Name()]['sort']) && !empty($_REQUEST['ctf'][$this->Name()]['sort'])) {
-			$this->sourceSort = "\"" . $_REQUEST['ctf'][$this->Name()]['sort'] . "\" " . $this->sort_dir;
-		}
-		elseif($sort = singleton($this->sourceClass())->stat('default_sort')) {
+		} elseif($frontendSort) {
+			$this->sourceSort = "\"$frontendSort\" {$this->sort_dir}";
+		} elseif($sort = singleton($this->sourceClass())->stat('default_sort')) {
 			$this->sourceSort = $sort;
-		}
-		else {
+		} else {
 			$this->sourceSort = "Created DESC";
 		}
 
@@ -301,7 +301,7 @@ class DataObjectManager extends ComplexTableField
 	{
 		$headings = array();
 		foreach($this->fieldList as $fieldName => $fieldTitle) {
-			if(isset($_REQUEST['ctf'][$this->Name()]['sort_dir']))
+			if(!empty($_REQUEST['ctf'][$this->Name()]['sort_dir']))
 				$dir = $_REQUEST['ctf'][$this->Name()]['sort_dir'] == "ASC" ? "DESC" : "ASC";
 			else
 				$dir = "ASC";
@@ -314,7 +314,7 @@ class DataObjectManager extends ComplexTableField
 					'sort' => $fieldName
 				)),
 				"SortDirection" => $dir,
-			  "IsSorted" => (isset($_REQUEST['ctf'][$this->Name()]['sort'])) && ($_REQUEST['ctf'][$this->Name()]['sort'] == $fieldName),
+			  "IsSorted" => (!empty($_REQUEST['ctf'][$this->Name()]['sort'])) && ($_REQUEST['ctf'][$this->Name()]['sort'] == $fieldName),
 				"ColumnWidthCSS" => !empty($this->column_widths) ? sprintf("style='width:%f%%;'",($this->column_widths[$fieldName] - 0.1)) : ""
 			));
 		}

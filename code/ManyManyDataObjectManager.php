@@ -86,20 +86,23 @@ class ManyManyDataObjectManager extends HasManyDataObjectManager
 			$this->setPageSize(999);
 
 		$original_sort = $this->sourceSort;
+		$frontendSort = empty($_REQUEST['ctf'][$this->Name()]['sort'])
+			? null
+			: $_REQUEST['ctf'][$this->Name()]['sort'];
 	    if(SortableDataObject::is_sortable_many_many($this->sourceClass(), $this->manyManyParentClass)) {
 	      list($parentClass, $componentClass, $parentField, $componentField, $table) = singleton($this->controllerClass())->many_many($this->Name());
 	      $sort_column = "MMSort";
-	      if(!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == $sort_column) {
+	      if(empty($frontendSort) || $frontendSort == $sort_column) {
 	        $this->sort = $sort_column;
 	        $this->sourceSort = "\"$sort_column\" " . SortableDataObject::$sort_dir;
 			$this->sourceSort .= ", \"Checked\" DESC";
 	      }
-	    } elseif($this->Sortable() && (!isset($_REQUEST['ctf'][$this->Name()]['sort']) || $_REQUEST['ctf'][$this->Name()]['sort'] == "SortOrder")) {
+	    } elseif($this->Sortable() && (empty($frontendSort) || $frontendSort == "SortOrder")) {
 			$this->sort = "SortOrder";
 			$this->sourceSort = "\"SortOrder\" " . SortableDataObject::$sort_dir;
 			$this->sourceSort .= ", \"Checked\" DESC";
-		} elseif(isset($_REQUEST['ctf'][$this->Name()]['sort']) && !empty($_REQUEST['ctf'][$this->Name()]['sort'])) {
-			$this->sourceSort = "\"".$_REQUEST['ctf'][$this->Name()]['sort'] . "\" " . $this->sort_dir;
+		} elseif($frontendSort) {
+			$this->sourceSort = "\"{$frontendSort}\" {$this->sort_dir}";
 		} elseif (empty($original_sort)) {
 			$this->sourceSort = singleton($this->sourceClass())->stat('default_sort');
 		}

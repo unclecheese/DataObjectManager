@@ -481,7 +481,7 @@ class DataObjectManager extends ComplexTableField
 	}
 
 	public function AddLink() {
-	    return Controller::join_links($this->BaseLink(), 'add');
+	    return Controller::join_links($this->BaseLink(), 'add?cacheb=' . time());
 	}
 
 	public function ShowAll()

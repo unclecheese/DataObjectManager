@@ -89,8 +89,8 @@
 						<% else %>
 							<div class="pad">
 								<% if Top.ShowAll %><span class="handle"><img src="dataobject_manager/images/move_icon.jpg" /></span><% end_if %>
-								<div class="file-icon"><a href="<% if CanViewOrEdit %>$EditLink<% else %>#<% end_if %> " rel="$PopupWidth" class="popup-button editlink tooltip"><img src="$FileIcon" alt="" /></a></div>
-								<div class="file-label"><a href="<% if CanViewOrEdit %>$EditLink<% else %>#<% end_if %>" rel="$PopupWidth" class="popup-button editlink tooltip">$FileLabel</a><br />$MarkingCheckbox</div>
+								<div class="file-icon"><a href="<% if CanViewOrEdit %>$EditLink<% else %>#<% end_if %> " rel="$PopupWidth" class="<% if CanViewOrEdit %>popup-button<% end_if %> editlink tooltip"><img src="$FileIcon" alt="" /></a></div>
+								<div class="file-label"><a href="<% if CanViewOrEdit %>$EditLink<% else %>#<% end_if %>" rel="$PopupWidth" class="<% if CanViewOrEdit %>popup-button<% end_if %> editlink tooltip">$FileLabel</a><br />$MarkingCheckbox</div>
 								<% if Can(delete) %><div class="delete"><a href="$DeleteLink" class="delete-link"><img src="dataobject_manager/images/trash.gif" height="12px" alt="delete" /></a></div><% end_if %>
 								<span class="tooltip-info" style="display:none">
 									<% control Fields %>

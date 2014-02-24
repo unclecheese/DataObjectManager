@@ -712,7 +712,9 @@ class DataObjectManager_Item extends ComplexTableField_Item {
 	     $action = false;
 	     switch($perm) {
 	       case "edit":
+	       	 if(!$this->item->canEdit()) continue;
 	       case "view":
+	       	 if(!$this->item->canView()) continue;
 	         $actions->push(new DataObjectManagerAction(
 	           $this->ViewOrEdit_i18n(),
 	           $this->EditLink(),
@@ -724,6 +726,7 @@ class DataObjectManager_Item extends ComplexTableField_Item {
 	       break;
 
 	       case "delete":
+	       	 if(!$this->item->canDelete()) continue;
 	         $actions->push(new DataObjectManagerAction(
 	           _t('DataObjectManager.DELETE','Delete'),
 	           $this->DeleteLink(),
@@ -735,6 +738,7 @@ class DataObjectManager_Item extends ComplexTableField_Item {
 	       break;
 
 	       case "duplicate":
+	       	 if(!$this->item->canCreate()) continue;
 	         $actions->push(new DataObjectManagerAction(
 	           _t('DataObjectManager.DUPLICATE','Duplicate'),
 	           $this->DuplicateLink(),

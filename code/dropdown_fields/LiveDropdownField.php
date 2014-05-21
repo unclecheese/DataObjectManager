@@ -16,7 +16,16 @@ class LiveDropdownField extends HiddenField {
 	public function getresults(SS_HTTPRequest $r) {
 
 			$q = Convert::raw2sql($r->requestVar('q'));
-			$results = DataObject::get($this->sourceClass,$this->labelField . " LIKE '%{$q}%'");
+			$qArray = explode(" ", $q);
+			if (is_array($qArray) && count($qArray) > 1) {
+				$where = $this->labelField . "!='' ";
+				foreach ($qArray as $value) {
+					$where .= "AND ". $this->labelField . " LIKE '%{$value}%' ";
+				}
+			} else {
+				$where = $this->labelField . " LIKE '%{$q}%'";
+			}
+			$results = DataObject::get($this->sourceClass, $where);
 			if($results) {
 				$set = new DataObjectSet();
 				foreach($results->toDropdownMap('ID', $this->labelField) as $key => $val) {

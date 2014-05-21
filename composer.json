@@ -1,0 +1,13 @@
+{
+	"name": "silverstripe/dataobject_manager",
+	"description": "Enhanced dataobjct editing for SilverStripe 2.x.",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "cms"],
+	"authors": [{
+		"name": "unclecheese"
+	}],
+	"require": {
+		"silverstripe/framework": "~2.4",
+		"silverstripe/cms": "~2.4"
+	}
+}
